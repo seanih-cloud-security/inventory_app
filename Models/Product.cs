@@ -1,0 +1,44 @@
+using System.ComponentModel;
+using System.Linq;
+
+namespace InventoryApp.Models;
+
+public class Product(BindingList<Part> associatedParts, int productId, string name, decimal price, int inStock, int min, int max)
+{
+    public BindingList<Part> AssociatedParts { get; set; } = associatedParts;
+    public int ProductId { get; set; } = productId;
+    public string Name { get; set; } = name;
+    public decimal Price { get; set; } = price;
+    public int InStock { get; set; } = inStock;
+    public int Min { get; set; } = min;
+    public int Max { get; set; } = max;
+    
+    public void CopyFrom(Product other)
+    {
+        ProductId = other.ProductId;
+        Name = other.Name;
+        Price = other.Price;
+        InStock = other.InStock;
+        Min = other.Min;
+        Max = other.Max;
+    }
+    
+    public void AddAssociatedPart(Part associatedPart)
+    {
+        AssociatedParts.Add(associatedPart);
+    }
+
+    public bool RemoveAssociatedPart(int partId)
+    {
+        if (AssociatedParts.All(part => part.PartId != partId)) return false;
+        {
+            AssociatedParts.Remove(AssociatedParts.First(part => part.PartId == partId));
+            return true;
+        }
+    }
+
+    public Part LookupAssociatedPart(int partId)
+    {
+        return AssociatedParts.FirstOrDefault(part => part.PartId == partId)!;
+    }
+}
