@@ -7,6 +7,7 @@ namespace InventoryApp.Views;
 public partial class InventoryView : UserControl
 {
     public event EventHandler? AddPartClicked;
+    public event EventHandler? ModifyPartClicked;
     public event EventHandler? ExitClicked;
 
     public InventoryView()
@@ -24,6 +25,7 @@ public partial class InventoryView : UserControl
     {
         // TODO: Add modify part logic here
         Console.WriteLine("ModifyPartButton_Click");
+        ModifyPartClicked?.Invoke(this, EventArgs.Empty);
     }
 
     private void DeletePartButton_Click(object? sender, RoutedEventArgs e)

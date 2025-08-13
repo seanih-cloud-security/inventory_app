@@ -4,12 +4,12 @@ using System;
 
 namespace InventoryApp.Views;
 
-public partial class AddPartView : UserControl
+public partial class ModifyPartView : UserControl
 {
     public event EventHandler? CancelClicked;
     public event EventHandler? SaveClicked;
 
-    public AddPartView()
+    public ModifyPartView()
     {
         InitializeComponent();
 
@@ -18,13 +18,13 @@ public partial class AddPartView : UserControl
         OutsourcedRadio.IsCheckedChanged += (_, _) => DynamicLabel.Text = "Machine ID:";
     }
 
-    private void SaveButton_Click(object? sender, RoutedEventArgs e)
+    private void ModifySaveButton_Click(object? sender, RoutedEventArgs e)
     {
         SaveClicked?.Invoke(this, EventArgs.Empty);
         // TODO: Add saving logic here
     }
 
-    private void CancelButton_Click(object? sender, RoutedEventArgs e)
+    private void ModifyCancelButton_Click(object? sender, RoutedEventArgs e)
     {
         CancelClicked?.Invoke(this, EventArgs.Empty);
     }
