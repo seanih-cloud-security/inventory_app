@@ -1,53 +1,52 @@
 using Avalonia.Controls;
-using Avalonia.Interactivity; // For RoutedEventArgs
+using Avalonia.Interactivity;
 using System;
 
 namespace InventoryApp.Views;
 
 public partial class MainWindow : Window
 {
+    private InventoryView _inventoryView;
+    private AddPartView? _addPartView;
+
     public MainWindow()
     {
         InitializeComponent();
+
+        _inventoryView = new InventoryView();
+        _inventoryView.AddPartClicked += InventoryView_AddPartClicked;
+        _inventoryView.ExitClicked += InventoryView_ExitClicked;
+
+        MainContent.Content = _inventoryView;
     }
 
-    // Example handler for Add button
-    private void AddPartButton_Click(object? sender, RoutedEventArgs e)
+    private void InventoryView_AddPartClicked(object? sender, EventArgs e)
     {
-        Console.WriteLine("Add button clicked");
-        // TODO: Add your add logic here
+        // TODO: Load AddPartView here later
+        _addPartView = new AddPartView();
+        _addPartView.CancelClicked += AddPartView_CancelClicked;
+        _addPartView.SaveClicked += AddPartView_SaveClicked;
+        MainContent.Content = _addPartView;
     }
 
-    // Similarly, add handlers for other buttons...
-    private void ModifyPartButton_Click(object? sender, RoutedEventArgs e)
+    private void InventoryView_ExitClicked(object? sender, EventArgs e)
     {
-        Console.WriteLine("Modify button clicked");
-    }
-
-    private void DeletePartButton_Click(object? sender, RoutedEventArgs e)
-    {
-        Console.WriteLine("Delete button clicked");
+        Close();
     }
     
-    private void AddProductButton_Click(object? sender, RoutedEventArgs e)
+    private void AddPartView_CancelClicked(object? sender, EventArgs e)
     {
-        Console.WriteLine("Add button clicked");
-        // TODO: Add your add logic here
+        // Return to inventory view
+        MainContent.Content = _inventoryView;
+        _addPartView = null;
     }
-
-    // Similarly, add handlers for other buttons...
-    private void ModifyProductButton_Click(object? sender, RoutedEventArgs e)
+    
+    private void AddPartView_SaveClicked(object? sender, EventArgs e)
     {
-        Console.WriteLine("Modify button clicked");
-    }
+        // TODO: Implement saving logic
 
-    private void DeleteProductButton_Click(object? sender, RoutedEventArgs e)
-    {
-        Console.WriteLine("Delete button clicked");
-    }
-
-    private void ExitButton_Click(object? sender, RoutedEventArgs e)
-    {
-        Close(); // closes the window
+        // After saving, go back to inventory view
+        MainContent.Content = _inventoryView;
+        _addPartView = null;
     }
 }

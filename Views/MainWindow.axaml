@@ -3,70 +3,7 @@
         x:Class="InventoryApp.Views.MainWindow"
         Title="Inventory Management System"
         Width="900" Height="500"
-        Padding="10">
+        Padding="0">
 
-    <Grid ColumnDefinitions="1*,1*" RowDefinitions="Auto,* Auto" RowSpacing="10" ColumnSpacing="20">
-        <!-- Title spanning both columns -->
-        <TextBlock Text="Inventory Management System"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   Grid.ColumnSpan="2"
-                   Margin="0,0,0,20"/>
-
-        <!-- Parts column -->
-        <StackPanel Grid.Row="1" Grid.Column="0" Spacing="10">
-            <Grid ColumnDefinitions="Auto,*,Auto">
-
-                <!-- Title label -->
-                <TextBlock Text="Parts" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Grid.Column="0"/>
-
-                <!-- Search textbox -->
-                <TextBox Width="200" Watermark="Search Parts..." Margin="10,0" Grid.Column="1"/>
-
-                <!-- Search button -->
-                <Button Content="Search" Width="80" Grid.Column="2"/>
-            </Grid>
-
-            <!-- Parts list -->
-            <ListBox Height="250"/>
-
-            <!-- Buttons for Parts -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                <Button Content="Add" Width="80" HorizontalContentAlignment="Center" Click="AddPartButton_Click"/>
-                <Button Content="Modify" Width="80" HorizontalContentAlignment="Center" Click="ModifyPartButton_Click"/>
-                <Button Content="Delete" Width="80" HorizontalContentAlignment="Center" Click="DeletePartButton_Click"/>
-            </StackPanel>
-        </StackPanel>
-
-        <!-- Products column -->
-        <StackPanel Grid.Row="1" Grid.Column="1" Spacing="10">
-            <Grid ColumnDefinitions="Auto,*,Auto">
-
-                <!-- Title label -->
-                <TextBlock Text="Products" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Grid.Column="0"/>
-
-                <!-- Search textbox -->
-                <TextBox Width="200" Watermark="Search Products..." Margin="10,0" Grid.Column="1"/>
-
-                <!-- Search button -->
-                <Button Content="Search" Width="80" Grid.Column="2"/>
-            </Grid>
-
-
-            <!-- Products list -->
-            <ListBox Height="250"/>
-
-            <!-- Buttons for Products -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                <Button Content="Add" Width="80" HorizontalContentAlignment="Center" Click="AddProductButton_Click"/>
-                <Button Content="Modify" Width="80" HorizontalContentAlignment="Center" Click="ModifyProductButton_Click"/>
-                <Button Content="Delete" Width="80" HorizontalContentAlignment="Center" Click="DeleteProductButton_Click"/>
-            </StackPanel>
-        </StackPanel>
-
-        <!-- Exit button below both columns -->
-        <Button Content="Exit" Width="100" Click="ExitButton_Click" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0"
-                Margin="0,10,0,0"/>
-    </Grid>
+    <ContentControl Name="MainContent"/>
 </Window>
