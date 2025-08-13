@@ -11,32 +11,44 @@
             <RadioButton Name="OutsourcedRadio" Content="Outsourced"/>
         </StackPanel>
 
-        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto Auto Auto Auto Auto Auto Auto" RowSpacing="10" ColumnSpacing="10">
-            <TextBlock Text="ID:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="IdTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="Auto Gen"/>
+        <!-- Keep the main form grid at 2 columns; rows 0..3 & 5 unchanged -->
+        <Grid ColumnDefinitions="Auto,*"
+              RowDefinitions="Auto Auto Auto Auto Auto Auto"
+              RowSpacing="10" ColumnSpacing="10">
 
-            <TextBlock Text="Name:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="NameTextBox" Grid.Row="1" Grid.Column="1"/>
+            <!-- Row 0: ID -->
+            <TextBlock Text="ID:" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="IdTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="Auto Gen" Width="200" HorizontalAlignment="Left"/>
 
-            <TextBlock Text="Inventory Level:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="InventoryTextBox" Grid.Row="2" Grid.Column="1"/>
+            <!-- Row 1: Name -->
+            <TextBlock Text="Name:" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="NameTextBox" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
 
-            <TextBlock Text="Price/Cost:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="PriceTextBox" Grid.Row="3" Grid.Column="1"/>
+            <!-- Row 2: Inventory -->
+            <TextBlock Text="Inventory Level:" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="InventoryTextBox" Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
 
-            <TextBlock Text="Max:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="MaxTextBox" Grid.Row="4" Grid.Column="1"/>
+            <!-- Row 3: Price -->
+            <TextBlock Text="Price/Cost:" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="PriceTextBox" Grid.Row="3" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
 
-            <TextBlock Text="Min:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="MinTextBox" Grid.Row="5" Grid.Column="1"/>
+            <!-- Row 4: Max & Min on the SAME row -->
+            <TextBlock Text="Max:" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+            <!-- Nested grid in column 1 to tightly pack MaxBox, Min label, MinBox -->
+            <Grid Grid.Row="4" Grid.Column="1" ColumnDefinitions="120,Auto,120" ColumnSpacing="10">
+                <TextBox Name="MaxTextBox" Grid.Column="0" Width="120" HorizontalAlignment="Left"/>
+                <TextBlock Text="Min:" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox Name="MinTextBox" Grid.Column="2" Width="120" HorizontalAlignment="Left"/>
+            </Grid>
 
-            <TextBlock Name="DynamicLabel" Text="Machine ID:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="DynamicTextBox" Grid.Row="6" Grid.Column="1"/>
+            <!-- Row 5: Dynamic field -->
+            <TextBlock Name="DynamicLabel" HorizontalAlignment="Right" Text="Machine ID:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="DynamicTextBox" Grid.Row="5" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,20,0,0">
-            <Button Content="Save" Width="100" Click="SaveButton_Click"/>
-            <Button Content="Cancel" Width="100" Click="CancelButton_Click"/>
+            <Button Content="Save" HorizontalContentAlignment="Center" Width="100" Click="SaveButton_Click"/>
+            <Button Content="Cancel" HorizontalContentAlignment="Center" Width="100" Click="CancelButton_Click"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

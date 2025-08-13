@@ -3,6 +3,10 @@
         x:Class="InventoryApp.Views.MainWindow"
         Title="Inventory Management System"
         Width="900" Height="500"
+        SizeToContent="WidthAndHeight"
+        MinWidth="500"
+        MinHeight="500"
+        CanResize="True"
         Padding="0">
 
     <ContentControl Name="MainContent"/>
