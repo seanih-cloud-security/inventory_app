@@ -6,12 +6,12 @@ using System;
 
 namespace InventoryApp.Views
 {
-    public partial class AddProductView : UserControl
+    public partial class ModifyProductView : UserControl
     {
         public event EventHandler? CancelClicked;
         public event EventHandler? SaveClicked;
         // Constructor
-        public AddProductView()
+        public ModifyProductView()
         {
             InitializeComponent();
         }
@@ -22,13 +22,13 @@ namespace InventoryApp.Views
         }
 
         // add event handlers here
-        private void AddProductSaveButton_Click(object? sender, RoutedEventArgs e)
+        private void ModifyProductSaveButton_Click(object? sender, RoutedEventArgs e)
         {
             SaveClicked?.Invoke(this, EventArgs.Empty);
-            // TODO: Add saving logic here
+            // TODO: Modify saving logic here
         }
 
-        private void AddProductCancelButton_Click(object? sender, RoutedEventArgs e)
+        private void ModifyProductCancelButton_Click(object? sender, RoutedEventArgs e)
         {
             CancelClicked?.Invoke(this, EventArgs.Empty);
         }

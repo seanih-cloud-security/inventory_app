@@ -9,6 +9,7 @@ public partial class MainWindow : Window
     private AddPartView? _addPartView;
     private ModifyPartView? _modifyPartView;
     private AddProductView? _addProductView;
+    private ModifyProductView? _modifyProductView;
 
     public MainWindow()
     {
@@ -18,6 +19,7 @@ public partial class MainWindow : Window
         _inventoryView.AddPartClicked += InventoryView_AddPartClicked;
         _inventoryView.ModifyPartClicked += InventoryView_ModifyPartClicked;
         _inventoryView.AddProductClicked += InventoryView_AddProductClicked;
+        _inventoryView.ModifyProductClicked += InventoryView_ModifyProductClicked;
         _inventoryView.ExitClicked += InventoryView_ExitClicked;
 
         MainContent.Content = _inventoryView;
@@ -48,6 +50,15 @@ public partial class MainWindow : Window
         _addProductView.CancelClicked += AddProductView_CancelClicked;
         _addProductView.SaveClicked += AddProductView_SaveClicked;
         MainContent.Content = _addProductView;
+    }
+    
+    private void InventoryView_ModifyProductClicked(object? sender, EventArgs e)
+    {
+        // TODO: Load AddProductView
+        _modifyProductView = new ModifyProductView();
+        _modifyProductView.CancelClicked += ModifyProductView_CancelClicked;
+        _modifyProductView.SaveClicked += ModifyProductView_SaveClicked;
+        MainContent.Content = _modifyProductView;
     }
 
     private void InventoryView_ExitClicked(object? sender, EventArgs e)
@@ -100,5 +111,21 @@ public partial class MainWindow : Window
         // Return to inventory view
         MainContent.Content = _inventoryView;
         _modifyPartView = null;
+    }
+    
+    private void ModifyProductView_SaveClicked(object? sender, EventArgs e)
+    {
+        // TODO: Implement saving logic
+
+        // After saving, go back to inventory view
+        MainContent.Content = _inventoryView;
+        _modifyProductView = null;
+    }
+    
+    private void ModifyProductView_CancelClicked(object? sender, EventArgs e)
+    {
+        // Return to inventory view
+        MainContent.Content = _inventoryView;
+        _modifyProductView = null;
     }
 }
