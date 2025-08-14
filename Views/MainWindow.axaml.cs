@@ -5,9 +5,10 @@ namespace InventoryApp.Views;
 
 public partial class MainWindow : Window
 {
-    private InventoryView _inventoryView;
+    private readonly InventoryView _inventoryView;
     private AddPartView? _addPartView;
     private ModifyPartView? _modifyPartView;
+    private AddProductView? _addProductView;
 
     public MainWindow()
     {
@@ -16,9 +17,8 @@ public partial class MainWindow : Window
         _inventoryView = new InventoryView();
         _inventoryView.AddPartClicked += InventoryView_AddPartClicked;
         _inventoryView.ModifyPartClicked += InventoryView_ModifyPartClicked;
+        _inventoryView.AddProductClicked += InventoryView_AddProductClicked;
         _inventoryView.ExitClicked += InventoryView_ExitClicked;
-        
-        
 
         MainContent.Content = _inventoryView;
     }
@@ -39,6 +39,15 @@ public partial class MainWindow : Window
         _modifyPartView.CancelClicked += ModifyPartView_CancelClicked;
         _modifyPartView.SaveClicked += ModifyPartView_SaveClicked;
         MainContent.Content = _modifyPartView;
+    }
+    
+    private void InventoryView_AddProductClicked(object? sender, EventArgs e)
+    {
+        // TODO: Load AddProductView
+        _addProductView = new AddProductView();
+        _addProductView.CancelClicked += AddProductView_CancelClicked;
+        _addProductView.SaveClicked += AddProductView_SaveClicked;
+        MainContent.Content = _addProductView;
     }
 
     private void InventoryView_ExitClicked(object? sender, EventArgs e)
@@ -62,13 +71,28 @@ public partial class MainWindow : Window
         _addPartView = null;
     }
     
+    private void AddProductView_SaveClicked(object? sender, EventArgs e)
+    {
+        // TODO: Implement saving logic
+
+        // After saving, go back to inventory view
+        MainContent.Content = _inventoryView;
+        _addProductView = null;
+    }
+    
+    private void AddProductView_CancelClicked(object? sender, EventArgs e)
+    {
+        // Return to inventory view
+        MainContent.Content = _inventoryView;
+        _addProductView = null;
+    }
     private void ModifyPartView_SaveClicked(object? sender, EventArgs e)
     {
         // TODO: Implement saving logic
 
         // After saving, go back to inventory view
         MainContent.Content = _inventoryView;
-        _addPartView = null;
+        _modifyPartView = null;
     }
     
     private void ModifyPartView_CancelClicked(object? sender, EventArgs e)
@@ -77,6 +101,4 @@ public partial class MainWindow : Window
         MainContent.Content = _inventoryView;
         _modifyPartView = null;
     }
-    
-    
 }
