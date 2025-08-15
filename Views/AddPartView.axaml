@@ -18,7 +18,7 @@
 
             <!-- Row 0: ID -->
             <TextBlock Text="ID:" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="IdTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="Auto Gen" Width="200" HorizontalAlignment="Left"/>
+            <TextBox Name="PartIdTextBox" Grid.Row="0" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
 
             <!-- Row 1: Name -->
             <TextBlock Text="Name:" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
@@ -33,17 +33,17 @@
             <TextBox Name="PriceTextBox" Grid.Row="3" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
 
             <!-- Row 4: Max & Min on the SAME row -->
-            <TextBlock Text="Max:" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBlock Text="Min:" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
             <!-- Nested grid in column 1 to tightly pack MaxBox, Min label, MinBox -->
             <Grid Grid.Row="4" Grid.Column="1" ColumnDefinitions="120,Auto,120" ColumnSpacing="10">
-                <TextBox Name="MaxTextBox" Grid.Column="0" Width="120" HorizontalAlignment="Left"/>
-                <TextBlock Text="Min:" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                <TextBox Name="MinTextBox" Grid.Column="2" Width="120" HorizontalAlignment="Left"/>
+                <TextBox Name="MinTextBox" Grid.Column="0" Width="120" HorizontalAlignment="Left"/>
+                <TextBlock Text="Max:" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox Name="MaxTextBox" Grid.Column="2" Width="120" HorizontalAlignment="Left"/>
             </Grid>
 
             <!-- Row 5: Dynamic field -->
             <TextBlock Name="DynamicLabel" HorizontalAlignment="Right" Text="Machine ID:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="DynamicTextBox" Grid.Row="5" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
+            <TextBox Name="MachineIdOrCompanyNameTextBox" Grid.Row="5" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,20,0,0">

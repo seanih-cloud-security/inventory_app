@@ -7,7 +7,7 @@ namespace InventoryApp.Models;
 public class Inventory
 {
     public BindingList<Product> Products { get; init; }
-    public BindingList<Part> AllParts { get; set; }
+    public static BindingList<Part>? AllParts { get; set; }
 
     public Inventory(BindingList<Product> products, BindingList<Part> allParts)
     {
