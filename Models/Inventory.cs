@@ -4,29 +4,31 @@ using System.Linq;
 
 namespace InventoryApp.Models;
 
-public class Inventory(BindingList<Product> products, BindingList<Part> allParts)
+public class Inventory
 {
-    public BindingList<Product> Products { get; init; } = products;
-    public BindingList<Part> AllParts { get; set; } = allParts;
+    public BindingList<Product> Products { get; init; }
+    public BindingList<Part> AllParts { get; set; }
 
-    // PRODUCT METHODS 
+    public Inventory(BindingList<Product> products, BindingList<Part> allParts)
+    {
+        Products = products;
+        AllParts = allParts;
+    }
+
+    // ===== PRODUCT METHODS =====
     public void AddProduct(Product product) => Products.Add(product);
 
     public bool RemoveProduct(int productId)
     {
-        if (!Products.Any(product => product.ProductId == productId))
-        {
-            return false;
-        }
-        
-        Products.Remove(Products.First(product => product.ProductId == productId));
+        var product = Products.FirstOrDefault(p => p.ProductId == productId);
+        if (product == null) return false;
+
+        Products.Remove(product);
         return true;
     }
 
-    public Product LookupProduct(int productId)
-    {
-        return Products.FirstOrDefault(p => p.ProductId == productId)!;
-    }
+    public Product? LookupProduct(int productId) =>
+        Products.FirstOrDefault(p => p.ProductId == productId);
 
     public void UpdateProduct(int index, Product newProduct)
     {
@@ -35,22 +37,22 @@ public class Inventory(BindingList<Product> products, BindingList<Part> allParts
             Products[index].CopyFrom(newProduct);
         }
     }
-    
-    // PART METHODS
+
+    // ===== PART METHODS =====
     public void AddPart(Part part) => AllParts.Add(part);
 
-    public bool DeletePart(int partId)
+    public bool RemovePart(int partId)
     {
-        var partToRemove = AllParts.FirstOrDefault(p => p.PartId == partId);
-        if (partToRemove == null) return false;
+        var part = AllParts.FirstOrDefault(p => p.PartId == partId);
+        if (part == null) return false;
 
-        AllParts.Remove(partToRemove);
+        AllParts.Remove(part);
         return true;
     }
-    
+
     public Part? LookupPart(int partId) =>
-        AllParts.FirstOrDefault(part => part.PartId == partId);
-    
+        AllParts.FirstOrDefault(p => p.PartId == partId);
+
     public void UpdatePart(int index, Part newPart)
     {
         if (index >= 0 && index < AllParts.Count)

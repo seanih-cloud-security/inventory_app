@@ -20,8 +20,10 @@ public partial class AddPartView : UserControl
 
     private void SaveButton_Click(object? sender, RoutedEventArgs e)
     {
-        SaveClicked?.Invoke(this, EventArgs.Empty);
         // TODO: Add saving logic here
+        
+        
+        SaveClicked?.Invoke(this, EventArgs.Empty);
     }
 
     private void CancelButton_Click(object? sender, RoutedEventArgs e)

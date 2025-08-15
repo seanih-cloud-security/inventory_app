@@ -30,15 +30,17 @@ public class Product(BindingList<Part> associatedParts, int productId, string na
 
     public bool RemoveAssociatedPart(int partId)
     {
-        if (AssociatedParts.All(part => part.PartId != partId)) return false;
+        var part = AssociatedParts.FirstOrDefault(p => p.PartId == partId);
+        if (part != null)
         {
-            AssociatedParts.Remove(AssociatedParts.First(part => part.PartId == partId));
+            AssociatedParts.Remove(part);
             return true;
         }
+        return false;
     }
 
-    public Part LookupAssociatedPart(int partId)
+    public Part? LookupAssociatedPart(int partId)
     {
-        return AssociatedParts.FirstOrDefault(part => part.PartId == partId)!;
+        return AssociatedParts.FirstOrDefault(p => p.PartId == partId);
     }
 }
