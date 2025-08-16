@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
+using InventoryApp.Models;
 
 namespace InventoryApp.Views;
 
@@ -15,6 +16,7 @@ public partial class InventoryView : UserControl
     public InventoryView()
     {
         InitializeComponent();
+        DataContext = AppData.Inventory;
     }
 
     private void AddPartButton_Click(object? sender, RoutedEventArgs e)

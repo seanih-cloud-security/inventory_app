@@ -1,6 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="InventoryApp.Views.InventoryView"
+             x:DataType="models:Inventory"
+             xmlns:models="clr-namespace:InventoryApp.Models"
              Padding="10">
 
     <Grid ColumnDefinitions="1*,1*" RowDefinitions="Auto,* Auto" RowSpacing="10" ColumnSpacing="20">
@@ -27,7 +29,16 @@
             </Grid>
 
             <!-- Parts list -->
-            <ListBox Name="PartsListBox" Height="250"/>
+            <ListBox Name="PartsListBox"
+                     Height="250"
+                     ItemsSource="{Binding AllParts}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
 
             <!-- Buttons for Parts -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">

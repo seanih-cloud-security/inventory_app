@@ -1,11 +1,13 @@
-using System.ComponentModel;
-using InventoryApp.Models;
+namespace InventoryApp.Models;
 
-public class AppData
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+
+public static class AppData
 {
     // Shared inventory instance
     public static Inventory Inventory { get; } = new Inventory(
-        new BindingList<Product>(),
-        new BindingList<Part>()
+        new ObservableCollection<Product>(),
+        new ObservableCollection<Part>()
     );
 }

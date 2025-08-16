@@ -5,7 +5,7 @@ namespace InventoryApp.Utils
         private static int _currentPartId = 0;
         private static int _currentProductId = 0;
 
-        public static int GeneratePartID()
+        public static int GeneratePartId()
         {
             return ++_currentPartId;
         }

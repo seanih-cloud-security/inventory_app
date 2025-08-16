@@ -12,7 +12,7 @@ public partial class AddPartView : UserControl
     public event EventHandler? SaveClicked;
     
     // Generate a new ID and set it as the default value
-    int _newId = IDGenerator.GeneratePartID();
+    int _newId = IDGenerator.GeneratePartId();
     public AddPartView()
     {
         InitializeComponent();

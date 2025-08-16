@@ -1,18 +1,19 @@
-using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace InventoryApp.Models;
 
 public class Inventory
 {
-    public BindingList<Product> Products { get; init; }
-    public static BindingList<Part>? AllParts { get; set; }
+    public ObservableCollection<Product> Products { get; init; } = new();
+    public ObservableCollection<Part> AllParts { get; set; } = new();
 
-    public Inventory(BindingList<Product> products, BindingList<Part> allParts)
+    // constructor can optionally take initial lists
+    public Inventory(ObservableCollection<Product>? products = null, ObservableCollection<Part>? allParts = null)
     {
-        Products = products;
-        AllParts = allParts;
+        Products = products ?? new();
+        AllParts = allParts ?? new();
     }
 
     // ===== PRODUCT METHODS =====
