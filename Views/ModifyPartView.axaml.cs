@@ -14,8 +14,8 @@ public partial class ModifyPartView : UserControl
         InitializeComponent();
 
         // Update label when radio buttons change
-        InHouseRadio.IsCheckedChanged += (_, _) => DynamicLabel.Text = "Company Name:";
-        OutsourcedRadio.IsCheckedChanged += (_, _) => DynamicLabel.Text = "Machine ID:";
+        InHouseRadio.IsCheckedChanged += (_, _) => DynamicLabel.Text = "Company Name";
+        OutsourcedRadio.IsCheckedChanged += (_, _) => DynamicLabel.Text = "Machine ID";
     }
 
     private void ModifySaveButton_Click(object? sender, RoutedEventArgs e)

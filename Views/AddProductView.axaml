@@ -20,26 +20,26 @@
               RowSpacing="10" ColumnSpacing="10">
 
             <!-- ID -->
-            <TextBlock Text="ID:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBlock Text="ID" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
             <TextBox Name="IdTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="Auto Gen"/>
 
             <!-- Name -->
-            <TextBlock Text="Name:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBlock Text="Name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
             <TextBox Name="NameTextBox" Grid.Row="1" Grid.Column="1"/>
 
             <!-- Inventory -->
-            <TextBlock Text="Inventory:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBlock Text="Inventory" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
             <TextBox Name="InventoryTextBox" Grid.Row="2" Grid.Column="1"/>
 
             <!-- Price -->
-            <TextBlock Text="Price:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBlock Text="Price" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
             <TextBox Name="PriceTextBox" Grid.Row="3" Grid.Column="1"/>
 
             <!-- Max/Min -->
-            <TextBlock Text="Max:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBlock Text="Max" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Spacing="10">
                 <TextBox Name="MaxTextBox" Width="60"/>
-                <TextBlock Text="Min:" VerticalAlignment="Center"/>
+                <TextBlock Text="Min" VerticalAlignment="Center"/>
                 <TextBox Name="MinTextBox" Width="60"/>
             </StackPanel>
         </Grid>
