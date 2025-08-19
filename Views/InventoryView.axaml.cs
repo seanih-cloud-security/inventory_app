@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
 using InventoryApp.Models;
+using InventoryApp.ViewModels;
 
 namespace InventoryApp.Views;
 
@@ -16,9 +17,13 @@ public partial class InventoryView : UserControl
     public InventoryView()
     {
         InitializeComponent();
-        DataContext = AppData.Inventory;
-    }
+        DataContext = AppData.AppInventory;
 
+        Console.WriteLine($"Parts count: {AppData.AppInventory.AllParts.Count}");
+        foreach (var part in AppData.AppInventory.AllParts)
+            Console.WriteLine(part);
+    }
+   
     private void AddPartButton_Click(object? sender, RoutedEventArgs e)
     {
         AddPartClicked?.Invoke(this, EventArgs.Empty);

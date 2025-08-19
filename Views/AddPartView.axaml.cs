@@ -26,7 +26,7 @@ public partial class AddPartView : UserControl
         // 1. Create new Part from user input
         if (InHouseRadio.IsChecked == true)
         {
-            Inhouse newPart = new Inhouse(
+            InHouse newPart = new InHouse(
                 partId: IdGenerator.GeneratePartId(),
                 name: NameTextBox.Text,
                 price: decimal.Parse(PriceTextBox.Text),
@@ -36,7 +36,7 @@ public partial class AddPartView : UserControl
                 machineId: int.Parse(MachineIdOrCompanyNameTextBox.Text)
             );
             
-            AppData.Inventory.AddPart(newPart);
+            AppData.AppInventory.AddPart(newPart);
             Console.WriteLine("Inhouse Part Added");
         }
         else
@@ -51,7 +51,7 @@ public partial class AddPartView : UserControl
                 companyName: MachineIdOrCompanyNameTextBox.Text
             );
             
-            AppData.Inventory.AddPart(newPart);
+            AppData.AppInventory.AddPart(newPart);
             Console.WriteLine("Outsourced Part Added");
         }
         

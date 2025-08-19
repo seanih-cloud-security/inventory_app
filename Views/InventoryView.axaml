@@ -30,45 +30,20 @@
 
             <!-- Parts list -->
             <StackPanel>
-                <!-- =====!!!!! ListBox METHOD !!!!!===== -->
-                <ListBox Name="PartsListBox"
-                         Height="250"
-                         ItemsSource="{Binding AllParts}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid ColumnDefinitions="*,*,*,*,*,*">
-                                <TextBlock Text="{Binding PartId}" Grid.Column="0" />
-                                <TextBlock Text="{Binding Name}" Grid.Column="1" />
-                                <TextBlock Text="{Binding InStock}" Grid.Column="2" />
-                                <TextBlock Text="{Binding Price, StringFormat='{}{0:C}'}" Grid.Column="3" />
-                                <TextBlock Text="{Binding Min}" Grid.Column="4" />
-                                <TextBlock Text="{Binding Max}" Grid.Column="5" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                
                 <!-- =====!!!!! DataGrid METHOD !!!!!===== -->
-                <!-- <DataGrid ItemsSource="{Binding AllParts}" -->
-                <!--           AutoGenerateColumns="False" -->
-                <!--           HeadersVisibility="Column" -->
-                <!--           Height="250" -->
-                <!--           IsReadOnly="True" -->
-                <!--           GridLinesVisibility="None" -->
-                <!--           RowBackground="Transparent" -->
-                <!--           Background="#F9F9F9" -->
-                <!--           BorderThickness="0" -->
-                <!--           Margin="10"> -->
-                <!-- -->
-                <!--     <DataGrid.Columns> -->
-                <!--         <DataGridTextColumn Header="ID" Binding="{Binding PartId}" /> -->
-                <!--         <DataGridTextColumn Header="Name" Binding="{Binding Name}" /> -->
-                <!--         <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat='{}{0:C}'}" /> -->
-                <!--         <DataGridTextColumn Header="In Stock" Binding="{Binding InStock}" /> -->
-                <!--         <DataGridTextColumn Header="Min" Binding="{Binding Min}" /> -->
-                <!--         <DataGridTextColumn Header="Max" Binding="{Binding Max}" /> -->
-                <!--     </DataGrid.Columns> -->
-                <!-- </DataGrid> -->
+                <DataGrid Name="PartsDataGrid"
+                          ItemsSource="{Binding AllParts}"
+                          AutoGenerateColumns="True"
+                          Height="250"
+                          IsReadOnly="True"
+                          GridLinesVisibility="All"
+                          HeadersVisibility="All">
+                </DataGrid>
+                <!-- Display number of parts -->
+                <TextBlock Text="{Binding AllParts.Count, StringFormat='Parts count: {0}'}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Margin="0,10"/>
             </StackPanel>
 
 

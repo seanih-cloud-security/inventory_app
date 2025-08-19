@@ -1,11 +1,12 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
 namespace InventoryApp.Models;
 
-public class Product(BindingList<Part> associatedParts, int productId, string name, decimal price, int inStock, int min, int max)
+public class Product(ObservableCollection<Part> associatedParts, int productId, string name, decimal price, int inStock, int min, int max)
 {
-    public BindingList<Part> AssociatedParts { get; set; } = associatedParts;
+    public ObservableCollection<Part> AssociatedParts { get; set; } = associatedParts;
     public int ProductId { get; set; } = productId;
     public string Name { get; set; } = name;
     public decimal Price { get; set; } = price;

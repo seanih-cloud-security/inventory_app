@@ -6,7 +6,7 @@ using System.ComponentModel;
 public static class AppData
 {
     // Shared inventory instance
-    public static Inventory Inventory { get; } = new Inventory(
+    public static Inventory AppInventory { get; } = new Inventory(
         new ObservableCollection<Product>(),
         new ObservableCollection<Part>()
     );
