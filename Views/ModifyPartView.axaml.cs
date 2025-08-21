@@ -41,6 +41,7 @@ public partial class ModifyPartView : UserControl
         // TODO: Add Update logic here
         // Read all input values
         int index = AppData.AppInventory.AllParts.IndexOf(_part);
+        int id = int.Parse(IdTextBox.Text!);
         string name = NameTextBox.Text!;
         string invText = InventoryTextBox.Text!;
         string priceText = PriceTextBox.Text!;
@@ -86,7 +87,7 @@ public partial class ModifyPartView : UserControl
             if (!machineValid) return;
 
             // Create InHouse part
-            updatedPart = new InHouse(index, name, price, inventory, min, max, machineId);
+            updatedPart = new InHouse(id, name, price, inventory, min, max, machineId);
         }
         else
         {
@@ -94,7 +95,7 @@ public partial class ModifyPartView : UserControl
             if (!await ValidationHelper.ValidateRequired(companyName, "Company Name")) return;
 
             // Create Outsourced part
-            updatedPart = new Outsourced(index, name, price, inventory, min, max, companyName);
+            updatedPart = new Outsourced(id, name, price, inventory, min, max, companyName);
         }
 
         // Add the new part to the inventory
