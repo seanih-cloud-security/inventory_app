@@ -10,7 +10,11 @@ namespace InventoryApp.Models;
 public class InHouse : Part
 {
     public int MachineId { get; set; }
-    public InHouse() { }
+
+    public InHouse()
+    {
+    }
+
     public InHouse(int partId, string name, decimal price, int inStock, int min, int max, int machineId)
         : base(partId, name, price, inStock, min, max)
     {

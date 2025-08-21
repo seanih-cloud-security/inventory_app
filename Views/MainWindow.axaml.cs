@@ -41,28 +41,28 @@ public partial class MainWindow : Window
         if (_addPartView is not null)
         {
             _addPartView.CancelClicked -= AddPartView_CancelClicked;
-            _addPartView.SaveClicked   -= AddPartView_SaveClicked;
+            _addPartView.SaveClicked -= AddPartView_SaveClicked;
             _addPartView = null;
         }
 
         if (_modifyPartView is not null)
         {
             _modifyPartView.CancelClicked -= ModifyPartView_CancelClicked;
-            _modifyPartView.SaveClicked   -= ModifyPartView_SaveClicked;
+            _modifyPartView.SaveClicked -= ModifyPartView_SaveClicked;
             _modifyPartView = null;
         }
 
         if (_addProductView is not null)
         {
             _addProductView.CancelClicked -= AddProductView_CancelClicked;
-            _addProductView.SaveClicked   -= AddProductView_SaveClicked;
+            _addProductView.SaveClicked -= AddProductView_SaveClicked;
             _addProductView = null;
         }
 
         if (_modifyProductView is not null)
         {
             _modifyProductView.CancelClicked -= ModifyProductView_CancelClicked;
-            _modifyProductView.SaveClicked   -= ModifyProductView_SaveClicked;
+            _modifyProductView.SaveClicked -= ModifyProductView_SaveClicked;
             _modifyProductView = null;
         }
     }
@@ -72,15 +72,15 @@ public partial class MainWindow : Window
     {
         _addPartView = new AddPartView();
         _addPartView.CancelClicked += AddPartView_CancelClicked;
-        _addPartView.SaveClicked   += AddPartView_SaveClicked;
+        _addPartView.SaveClicked += AddPartView_SaveClicked;
         NavigateTo(_addPartView);
     }
 
-    private void InventoryView_ModifyPartClicked(object? sender, EventArgs e)
+    private void InventoryView_ModifyPartClicked(Part selectedPart)
     {
-        _modifyPartView = new ModifyPartView();
+        _modifyPartView = new ModifyPartView(selectedPart);
         _modifyPartView.CancelClicked += ModifyPartView_CancelClicked;
-        _modifyPartView.SaveClicked   += ModifyPartView_SaveClicked;
+        _modifyPartView.SaveClicked += ModifyPartView_SaveClicked;
         NavigateTo(_modifyPartView);
     }
 
@@ -88,7 +88,7 @@ public partial class MainWindow : Window
     {
         _addProductView = new AddProductView();
         _addProductView.CancelClicked += AddProductView_CancelClicked;
-        _addProductView.SaveClicked   += AddProductView_SaveClicked;
+        _addProductView.SaveClicked += AddProductView_SaveClicked;
         NavigateTo(_addProductView);
     }
 
@@ -96,7 +96,7 @@ public partial class MainWindow : Window
     {
         _modifyProductView = new ModifyProductView();
         _modifyProductView.CancelClicked += ModifyProductView_CancelClicked;
-        _modifyProductView.SaveClicked   += ModifyProductView_SaveClicked;
+        _modifyProductView.SaveClicked += ModifyProductView_SaveClicked;
         NavigateTo(_modifyProductView);
     }
 
@@ -106,15 +106,15 @@ public partial class MainWindow : Window
     }
 
     // --- Save/Cancel from child views -> back to inventory ---
-    private void AddPartView_SaveClicked(object? sender, EventArgs e)     => ReturnToInventory();
-    private void AddPartView_CancelClicked(object? sender, EventArgs e)   => ReturnToInventory();
+    private void AddPartView_SaveClicked(object? sender, EventArgs e) => ReturnToInventory();
+    private void AddPartView_CancelClicked(object? sender, EventArgs e) => ReturnToInventory();
 
-    private void ModifyPartView_SaveClicked(object? sender, EventArgs e)  => ReturnToInventory();
-    private void ModifyPartView_CancelClicked(object? sender, EventArgs e)=> ReturnToInventory();
+    private void ModifyPartView_SaveClicked(object? sender, EventArgs e) => ReturnToInventory();
+    private void ModifyPartView_CancelClicked(object? sender, EventArgs e) => ReturnToInventory();
 
-    private void AddProductView_SaveClicked(object? sender, EventArgs e)  => ReturnToInventory();
-    private void AddProductView_CancelClicked(object? sender, EventArgs e)=> ReturnToInventory();
+    private void AddProductView_SaveClicked(object? sender, EventArgs e) => ReturnToInventory();
+    private void AddProductView_CancelClicked(object? sender, EventArgs e) => ReturnToInventory();
 
-    private void ModifyProductView_SaveClicked(object? sender, EventArgs e)=> ReturnToInventory();
-    private void ModifyProductView_CancelClicked(object? sender, EventArgs e)=> ReturnToInventory();
+    private void ModifyProductView_SaveClicked(object? sender, EventArgs e) => ReturnToInventory();
+    private void ModifyProductView_CancelClicked(object? sender, EventArgs e) => ReturnToInventory();
 }

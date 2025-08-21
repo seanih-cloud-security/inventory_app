@@ -12,39 +12,40 @@
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
                    Grid.ColumnSpan="2"
-                   Margin="0,0,0,20"/>
+                   Margin="0,0,0,20" />
 
         <!-- Parts column -->
         <StackPanel Grid.Row="1" Grid.Column="0" Spacing="10">
             <Grid ColumnDefinitions="Auto,*,Auto">
 
                 <!-- Title label -->
-                <TextBlock Text="Parts" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Grid.Column="0"/>
+                <TextBlock Text="Parts" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Grid.Column="0" />
 
                 <!-- Search textbox -->
-                <TextBox Name="PartsSearchBox" Width="200" Watermark="Search Parts..." Margin="10,0" Grid.Column="1"/>
+                <TextBox Name="PartsSearchBox" Width="200" Watermark="Search Parts..." Margin="10,0" Grid.Column="1" />
 
                 <!-- Search button -->
-                <Button Content="Search" Width="80" Grid.Column="2"/>
+                <Button Content="Search" Width="80" Grid.Column="2" />
             </Grid>
 
             <!-- Parts list -->
             <StackPanel>
                 <!-- =====!!!!! DataGrid METHOD !!!!!===== -->
-                <DataGrid Name="PartsDataGrid"
+                <DataGrid x:Name="PartsDataGrid"
                           ItemsSource="{Binding AllParts}"
                           AutoGenerateColumns="False"
                           Height="250"
                           IsReadOnly="True"
                           GridLinesVisibility="All"
-                          HeadersVisibility="All">
+                          HeadersVisibility="All"
+                          SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Part ID" Binding="{Binding PartId}" Width="Auto"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="Auto"/>
-                        <DataGridTextColumn Header="In Stock" Binding="{Binding InStock}" Width="Auto"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" Width="Auto"/>
-                        <DataGridTextColumn Header="Min" Binding="{Binding Min}" Width="Auto"/>
-                        <DataGridTextColumn Header="Max" Binding="{Binding Max}" Width="Auto"/>
+                        <DataGridTextColumn Header="Part ID" Binding="{Binding PartId}" Width="Auto" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="Auto" />
+                        <DataGridTextColumn Header="In Stock" Binding="{Binding InStock}" Width="Auto" />
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" Width="Auto" />
+                        <DataGridTextColumn Header="Min" Binding="{Binding Min}" Width="Auto" />
+                        <DataGridTextColumn Header="Max" Binding="{Binding Max}" Width="Auto" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -52,9 +53,9 @@
 
             <!-- Buttons for Parts -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                <Button Content="Add" Width="80" HorizontalContentAlignment="Center" Click="AddPartButton_Click"/>
-                <Button Content="Modify" Width="80" HorizontalContentAlignment="Center" Click="ModifyPartButton_Click"/>
-                <Button Content="Delete" Width="80" HorizontalContentAlignment="Center" Click="DeletePartButton_Click"/>
+                <Button Content="Add" Width="80" HorizontalContentAlignment="Center" Click="AddPartButton_Click" />
+                <Button Content="Modify" Width="80" HorizontalContentAlignment="Center" Click="ModifyPartButton_Click" />
+                <Button Content="Delete" Width="80" HorizontalContentAlignment="Center" Click="DeletePartButton_Click" />
             </StackPanel>
         </StackPanel>
 
@@ -63,13 +64,14 @@
             <Grid ColumnDefinitions="Auto,*,Auto">
 
                 <!-- Title label -->
-                <TextBlock Text="Products" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Grid.Column="0"/>
+                <TextBlock Text="Products" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Grid.Column="0" />
 
                 <!-- Search textbox -->
-                <TextBox Name="ProductsSearchBox" Width="200" Watermark="Search Products..." Margin="10,0" Grid.Column="1"/>
+                <TextBox Name="ProductsSearchBox" Width="200" Watermark="Search Products..." Margin="10,0"
+                         Grid.Column="1" />
 
                 <!-- Search button -->
-                <Button Content="Search" Width="80" Grid.Column="2"/>
+                <Button Content="Search" Width="80" Grid.Column="2" />
             </Grid>
 
             <!-- Products list -->
@@ -82,26 +84,29 @@
                           GridLinesVisibility="All"
                           HeadersVisibility="All">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="Auto"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="Auto"/>
-                        <DataGridTextColumn Header="In Stock" Binding="{Binding InStock}" Width="Auto"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" Width="Auto"/>
-                        <DataGridTextColumn Header="Min" Binding="{Binding Min}" Width="Auto"/>
-                        <DataGridTextColumn Header="Max" Binding="{Binding Max}" Width="Auto"/>
+                        <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="Auto" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="Auto" />
+                        <DataGridTextColumn Header="In Stock" Binding="{Binding InStock}" Width="Auto" />
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" Width="Auto" />
+                        <DataGridTextColumn Header="Min" Binding="{Binding Min}" Width="Auto" />
+                        <DataGridTextColumn Header="Max" Binding="{Binding Max}" Width="Auto" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
 
             <!-- Buttons for Products -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                <Button Content="Add" Width="80" HorizontalContentAlignment="Center" Click="AddProductButton_Click"/>
-                <Button Content="Modify" Width="80" HorizontalContentAlignment="Center" Click="ModifyProductButton_Click"/>
-                <Button Content="Delete" Width="80" HorizontalContentAlignment="Center" Click="DeleteProductButton_Click"/>
+                <Button Content="Add" Width="80" HorizontalContentAlignment="Center" Click="AddProductButton_Click" />
+                <Button Content="Modify" Width="80" HorizontalContentAlignment="Center"
+                        Click="ModifyProductButton_Click" />
+                <Button Content="Delete" Width="80" HorizontalContentAlignment="Center"
+                        Click="DeleteProductButton_Click" />
             </StackPanel>
         </StackPanel>
 
         <!-- Exit button below both columns -->
-        <Button Content="Exit" Width="100" Click="ExitButton_Click" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0"
-                Margin="0,10,0,0"/>
+        <Button Content="Exit" Width="100" Click="ExitButton_Click" HorizontalAlignment="Right"
+                HorizontalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0"
+                Margin="0,10,0,0" />
     </Grid>
 </UserControl>

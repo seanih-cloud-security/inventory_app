@@ -9,5 +9,5 @@
         CanResize="True"
         Padding="0">
 
-    <ContentControl Name="MainContent"/>
+    <ContentControl Name="MainContent" />
 </Window>

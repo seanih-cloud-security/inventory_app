@@ -6,10 +6,13 @@ public class Part
     public int InStock { get; set; }
     public int Min { get; set; }
     public int Max { get; set; }
-    
+
     public override string ToString() => $"{PartId} - {Name} - {Price:C}";
 
-    public Part() {}
+    public Part()
+    {
+    }
+
     public Part(int partId, string name, decimal price, int inStock, int min, int max)
     {
         PartId = partId;

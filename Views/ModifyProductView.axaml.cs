@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
-
 using System;
 
 namespace InventoryApp.Views
@@ -9,7 +8,9 @@ namespace InventoryApp.Views
     public partial class ModifyProductView : UserControl
     {
         public event EventHandler? CancelClicked;
+
         public event EventHandler? SaveClicked;
+
         // Constructor
         public ModifyProductView()
         {

@@ -13,7 +13,7 @@ public class Inventory
     {
         Products = products ?? [];
         AllParts = allParts ?? [];
-        
+
         AllParts.Add(new InHouse
         {
             PartId = 1,
@@ -35,8 +35,8 @@ public class Inventory
             Max = 100,
             CompanyName = "Fastenal"
         });
-        
-        Products.Add(new Product(AllParts,1,"sean",3,3,4,6));
+
+        Products.Add(new Product(AllParts, 1, "sean", 3, 3, 4, 6));
     }
 
     // ===== PRODUCT METHODS =====

@@ -9,7 +9,7 @@ namespace InventoryApp.Views;
 public partial class InventoryView : UserControl
 {
     public event EventHandler? AddPartClicked;
-    public event EventHandler? ModifyPartClicked;
+    public event Action<Part>? ModifyPartClicked;
     public event EventHandler? AddProductClicked;
     public event EventHandler? ModifyProductClicked;
     public event EventHandler? ExitClicked;
@@ -18,23 +18,25 @@ public partial class InventoryView : UserControl
     {
         InitializeComponent();
         DataContext = AppData.AppInventory;
-
-        Console.WriteLine($"Parts count: {AppData.AppInventory.AllParts.Count}");
-        foreach (var part in AppData.AppInventory.AllParts)
-            Console.WriteLine(part);
     }
-   
+
     private void AddPartButton_Click(object? sender, RoutedEventArgs e)
     {
         AddPartClicked?.Invoke(this, EventArgs.Empty);
     }
-    
+
     // Implement other button handlers similarly or add events
     private void ModifyPartButton_Click(object? sender, RoutedEventArgs e)
     {
         // TODO: Add modify part logic here
-        Console.WriteLine("ModifyPartButton_Click");
-        ModifyPartClicked?.Invoke(this, EventArgs.Empty);
+        if (PartsDataGrid.SelectedItem is Part selectedPart)
+        {
+            ModifyPartClicked?.Invoke(selectedPart);
+        }
+        else
+        {
+            Console.WriteLine("No part selected to modify.");
+        }
     }
 
     private void DeletePartButton_Click(object? sender, RoutedEventArgs e)
@@ -62,10 +64,9 @@ public partial class InventoryView : UserControl
         // TODO: Add delete product logic here
         Console.WriteLine("Delete product clicked");
     }
-    
+
     private void ExitButton_Click(object? sender, RoutedEventArgs e)
     {
         ExitClicked?.Invoke(this, EventArgs.Empty);
     }
-
 }
