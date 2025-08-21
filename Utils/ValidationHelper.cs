@@ -1,6 +1,10 @@
-using Avalonia.Controls;
+using System.Linq;
 using MsBox.Avalonia;
 using System.Threading.Tasks;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Layout;
 
 namespace InventoryApp.Utils
 {
@@ -61,6 +65,57 @@ namespace InventoryApp.Utils
             }
 
             return (true, result);
+        }
+        
+        // CONFIRM DELETE PART
+        public static async Task<bool> ShowConfirmation(string message, string title = "Confirm Delete")
+        {
+            var dialog = new Window
+            {
+                Title = title,
+                Width = 400,
+                Height = 150,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Content = new StackPanel
+                {
+                    Margin = new Thickness(20),
+                    Spacing = 10,
+                    Children =
+                    {
+                        new TextBlock { Text = message, TextWrapping = Avalonia.Media.TextWrapping.Wrap },
+                        new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                            Spacing = 20,
+                            Children =
+                            {
+                                new Button { Content = "Yes", Width = 80, IsDefault = true, Name="YesBtn" },
+                                new Button { Content = "No", Width = 80, IsCancel = true, Name="NoBtn" }
+                            }
+                        }
+                    }
+                }
+            };
+
+            var tcs = new TaskCompletionSource<bool>();
+
+            // Hook up buttons
+            (dialog.Content as StackPanel)!.Children.OfType<StackPanel>()
+                .First().Children.OfType<Button>().First(b => b.Name=="YesBtn").Click += (_, _) =>
+                {
+                    tcs.SetResult(true);
+                    dialog.Close();
+                };
+            (dialog.Content as StackPanel)!.Children.OfType<StackPanel>()
+                .First().Children.OfType<Button>().First(b => b.Name=="NoBtn").Click += (_, _) =>
+                {
+                    tcs.SetResult(false);
+                    dialog.Close();
+                };
+
+            await dialog.ShowDialog((Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!);
+            return await tcs.Task;
         }
     }
 }

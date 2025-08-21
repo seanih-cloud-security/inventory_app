@@ -2,7 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
 using InventoryApp.Models;
-using InventoryApp.ViewModels;
+using InventoryApp.Utils;
 
 namespace InventoryApp.Views;
 
@@ -39,10 +39,23 @@ public partial class InventoryView : UserControl
         }
     }
 
-    private void DeletePartButton_Click(object? sender, RoutedEventArgs e)
+    private async void DeletePartButton_Click(object? sender, RoutedEventArgs e)
     {
-        // TODO: Add delete part logic here
-        Console.WriteLine("DeletePartButton_Click");
+        if (PartsDataGrid.SelectedItem is not Part selectedPart)
+        {
+            await ValidationHelper.ShowError("Please select a part to delete.");
+            return;
+        }
+
+        bool confirm = await ValidationHelper.ShowConfirmation(
+            $"Are you sure you want to delete '{selectedPart.Name}'?",
+            "Delete Part");
+
+        if (confirm)
+        {
+            AppData.AppInventory.AllParts.Remove(selectedPart);
+            Console.WriteLine($"Part {selectedPart.Name} deleted.");
+        }
     }
 
     private void AddProductButton_Click(object? sender, RoutedEventArgs e)
