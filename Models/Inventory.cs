@@ -103,8 +103,9 @@ public class Inventory:INotifyPropertyChanged
         return true;
     }
 
-    public Part? LookupPart(int partId) =>
-        AllParts.FirstOrDefault(p => p.PartId == partId);
+    public Part? LookupPart(string name) =>
+        AllParts.FirstOrDefault(p => 
+            p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
     public void UpdatePart(int index, Part newPart)
     {

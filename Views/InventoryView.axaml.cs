@@ -1,8 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
+using System.Collections.Generic;
 using InventoryApp.Models;
 using InventoryApp.Utils;
+using MsBox.Avalonia;
 
 namespace InventoryApp.Views;
 
@@ -61,16 +63,33 @@ public partial class InventoryView : UserControl
         }
     }
     
-    private void SearchButton_Click(object? sender, RoutedEventArgs e)
+    private async void SearchPartButton_Click(object? sender, RoutedEventArgs e)
     {
-        string term = PartsSearchBox.Text ?? string.Empty;
-        AppData.AppInventory.RefreshFilteredParts(term);
-    }
+        string searchText = PartsSearchBox.Text?.Trim() ?? "";
 
-    private void ClearSearchButton_Click(object? sender, RoutedEventArgs e)
-    {
-        PartsSearchBox.Text = string.Empty;
-        AppData.AppInventory.RefreshFilteredParts();
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            // Reset to show all parts
+            PartsDataGrid.ItemsSource = AppData.AppInventory.AllParts;
+            return;
+        }
+
+        // Lookup by name
+        var part = AppData.AppInventory.LookupPart(searchText);
+
+        if (part != null)
+        {
+            PartsDataGrid.ItemsSource = new List<Part> { part };
+        }
+        else
+        {
+            var noResults = MessageBoxManager.GetMessageBoxStandard(
+                "Search", 
+                "No results match."
+            );
+            await noResults.ShowAsync();
+            PartsDataGrid.ItemsSource = AppData.AppInventory.AllParts; // Reset
+        }
     }
 
     private void AddProductButton_Click(object? sender, RoutedEventArgs e)
