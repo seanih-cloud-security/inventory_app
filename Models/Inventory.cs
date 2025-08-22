@@ -1,12 +1,40 @@
+using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace InventoryApp.Models;
 
-public class Inventory
+public class Inventory:INotifyPropertyChanged
 {
     public ObservableCollection<Product> Products { get; set; }
     public ObservableCollection<Part> AllParts { get; set; }
+    
+    private ObservableCollection<Part> _filteredParts = new();
+    public ObservableCollection<Part> FilteredParts
+    {
+        get => _filteredParts;
+        private set
+        {
+            _filteredParts = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public void RefreshFilteredParts(string? searchTerm = null)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            FilteredParts = new ObservableCollection<Part>(AllParts);
+        else
+            FilteredParts = new ObservableCollection<Part>(
+                AllParts.Where(p => p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            );
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     // constructor can optionally take initial lists
     public Inventory(ObservableCollection<Product>? products = null, ObservableCollection<Part>? allParts = null)
@@ -71,6 +99,7 @@ public class Inventory
         if (part == null) return false;
 
         AllParts.Remove(part);
+        RefreshFilteredParts();
         return true;
     }
 
@@ -82,6 +111,7 @@ public class Inventory
         if (index >= 0 && index < AllParts.Count)
         {
             AllParts[index].CopyFrom(newPart);
+            RefreshFilteredParts();
         }
     }
 }

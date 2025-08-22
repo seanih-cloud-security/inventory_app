@@ -1,4 +1,4 @@
-public class Part
+public abstract class Part
 {
     public int PartId { get; set; }
     public string Name { get; set; } = null!;

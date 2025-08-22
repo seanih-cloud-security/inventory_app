@@ -25,14 +25,14 @@
                 <TextBox Name="PartsSearchBox" Width="200" Watermark="Search Parts..." Margin="10,0" Grid.Column="1" />
 
                 <!-- Search button -->
-                <Button Content="Search" Width="80" Grid.Column="2" />
+                <Button Grid.Column="2" x:Name="SearchButton" Width="80" Content="Search" Click="SearchButton_Click" />
             </Grid>
 
             <!-- Parts list -->
             <StackPanel>
                 <!-- =====!!!!! DataGrid METHOD !!!!!===== -->
                 <DataGrid x:Name="PartsDataGrid"
-                          ItemsSource="{Binding AllParts}"
+                          ItemsSource="{Binding FilteredParts}"
                           AutoGenerateColumns="False"
                           Height="250"
                           IsReadOnly="True"

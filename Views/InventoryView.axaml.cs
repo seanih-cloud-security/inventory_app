@@ -18,6 +18,9 @@ public partial class InventoryView : UserControl
     {
         InitializeComponent();
         DataContext = AppData.AppInventory;
+        
+        // Initialize FilteredParts with everything
+        AppData.AppInventory.RefreshFilteredParts();
     }
 
     private void AddPartButton_Click(object? sender, RoutedEventArgs e)
@@ -53,9 +56,21 @@ public partial class InventoryView : UserControl
 
         if (confirm)
         {
-            AppData.AppInventory.AllParts.Remove(selectedPart);
+            AppData.AppInventory.RemovePart(selectedPart.PartId);
             Console.WriteLine($"Part {selectedPart.Name} deleted.");
         }
+    }
+    
+    private void SearchButton_Click(object? sender, RoutedEventArgs e)
+    {
+        string term = PartsSearchBox.Text ?? string.Empty;
+        AppData.AppInventory.RefreshFilteredParts(term);
+    }
+
+    private void ClearSearchButton_Click(object? sender, RoutedEventArgs e)
+    {
+        PartsSearchBox.Text = string.Empty;
+        AppData.AppInventory.RefreshFilteredParts();
     }
 
     private void AddProductButton_Click(object? sender, RoutedEventArgs e)
