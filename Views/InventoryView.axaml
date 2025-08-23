@@ -80,7 +80,7 @@
                           ItemsSource="{Binding Products}"
                           AutoGenerateColumns="False"
                           Height="250"
-                          IsReadOnly="False"
+                          IsReadOnly="True"
                           GridLinesVisibility="All"
                           HeadersVisibility="All">
                     <DataGrid.Columns>

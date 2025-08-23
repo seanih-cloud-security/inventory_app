@@ -19,6 +19,7 @@ namespace InventoryApp.Views
         public AddProductView()
         {
             InitializeComponent();
+            DataContext = this;
             
             // Bind grids
             var allPartsGrid = this.FindControl<DataGrid>("AllPartsDataGrid");
