@@ -88,7 +88,8 @@ public partial class InventoryView : UserControl
                 "No results match."
             );
             await noResults.ShowAsync();
-            PartsDataGrid.ItemsSource = AppData.AppInventory.AllParts; // Reset
+            // Reset
+            PartsDataGrid.ItemsSource = AppData.AppInventory.AllParts;
         }
     }
 
@@ -97,6 +98,11 @@ public partial class InventoryView : UserControl
         // TODO: Add add product logic here
         Console.WriteLine("AddProductButton_Click");
         AddProductClicked?.Invoke(this, EventArgs.Empty);
+        
+        // var addProductView = new AddProductView();
+        // addProductView.CancelClicked += AddProductView_CancelClicked;
+        // addProductView.SaveClicked   += AddProductView_SaveClicked;
+        // NavigateTo(addProductView);
     }
 
     private void ModifyProductButton_Click(object? sender, RoutedEventArgs e)

@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using System;
+using InventoryApp.Models;
 
 namespace InventoryApp.Views;
 
@@ -112,7 +113,7 @@ public partial class MainWindow : Window
     private void ModifyPartView_SaveClicked(object? sender, EventArgs e) => ReturnToInventory();
     private void ModifyPartView_CancelClicked(object? sender, EventArgs e) => ReturnToInventory();
 
-    private void AddProductView_SaveClicked(object? sender, EventArgs e) => ReturnToInventory();
+    private void AddProductView_SaveClicked(object? sender, Product newProduct) => ReturnToInventory();
     private void AddProductView_CancelClicked(object? sender, EventArgs e) => ReturnToInventory();
 
     private void ModifyProductView_SaveClicked(object? sender, EventArgs e) => ReturnToInventory();
