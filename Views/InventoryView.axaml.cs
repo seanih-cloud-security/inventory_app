@@ -96,13 +96,7 @@ public partial class InventoryView : UserControl
     private void AddProductButton_Click(object? sender, RoutedEventArgs e)
     {
         // TODO: Add add product logic here
-        Console.WriteLine("AddProductButton_Click");
         AddProductClicked?.Invoke(this, EventArgs.Empty);
-        
-        // var addProductView = new AddProductView();
-        // addProductView.CancelClicked += AddProductView_CancelClicked;
-        // addProductView.SaveClicked   += AddProductView_SaveClicked;
-        // NavigateTo(addProductView);
     }
 
     private void ModifyProductButton_Click(object? sender, RoutedEventArgs e)

@@ -1,41 +1,11 @@
-// using Avalonia.Controls;
-// using Avalonia.Interactivity;
-// using System;
-//
-// namespace InventoryApp.Views
-// {
-//     public partial class AddProductView : UserControl
-//     {
-//         public event EventHandler? CancelClicked;
-//         public event EventHandler? SaveClicked;
-//
-//         // Constructor
-//         public AddProductView()
-//         {
-//             InitializeComponent();
-//         }
-//
-//         // add event handlers here
-//         private void AddProductSaveButton_Click(object? sender, RoutedEventArgs e)
-//         {
-//             SaveClicked?.Invoke(this, EventArgs.Empty);
-//             // TODO: Add saving logic here
-//         }
-//
-//         private void AddProductCancelButton_Click(object? sender, RoutedEventArgs e)
-//         {
-//             CancelClicked?.Invoke(this, EventArgs.Empty);
-//         }
-//     }
-// }
-
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using InventoryApp.Models;
-using InventoryApp.Utils; // assuming your Part/Product classes live here
-using MsBox.Avalonia; // for AppData.AppInventory
+using InventoryApp.Utils;
+using MsBox.Avalonia;
 
 namespace InventoryApp.Views
 {
@@ -49,7 +19,7 @@ namespace InventoryApp.Views
         public AddProductView()
         {
             InitializeComponent();
-
+            
             // Bind grids
             var allPartsGrid = this.FindControl<DataGrid>("AllPartsDataGrid");
             var assocPartsGrid = this.FindControl<DataGrid>("AssociatedPartsDataGrid");
@@ -60,6 +30,36 @@ namespace InventoryApp.Views
             // Wire buttons
             this.FindControl<Button>("AddPartToProductBtn")!.Click += AddAssocPartButton_Click;
             this.FindControl<Button>("DeletePartFromProductBtn")!.Click += DeleteAssocPartButton_Click;
+        }
+        
+        private async void SearchPartButton_Click(object? sender, RoutedEventArgs e)
+        {
+            string searchText = PartsSearchTextBox.Text?.Trim() ?? "";
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                // Reset to show all parts
+                AllPartsDataGrid.ItemsSource = AppData.AppInventory.AllParts;
+                return;
+            }
+
+            // Lookup by name
+            var part = AppData.AppInventory.LookupPart(searchText);
+
+            if (part != null)
+            {
+                AllPartsDataGrid.ItemsSource = new List<Part> { part };
+            }
+            else
+            {
+                var noResults = MessageBoxManager.GetMessageBoxStandard(
+                    "Search", 
+                    "No results match."
+                );
+                await noResults.ShowAsync();
+                // Reset
+                AllPartsDataGrid.ItemsSource = AppData.AppInventory.AllParts;
+            }
         }
 
         private void AddAssocPartButton_Click(object? sender, RoutedEventArgs e)
@@ -120,7 +120,7 @@ namespace InventoryApp.Views
 
                 var newProduct = new Product(
                     new ObservableCollection<Part>(),
-                    IdGenerator.GenerateProductID(),
+                    IdGenerator.GenerateProductId(),
                     name,
                     price,
                     inventory,

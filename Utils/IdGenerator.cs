@@ -13,7 +13,7 @@ namespace InventoryApp.Utils
             return ++_currentPartId;
         }
 
-        public static int GenerateProductID()
+        public static int GenerateProductId()
         {
             return ++_currentProductId;
         }

@@ -49,8 +49,8 @@
 
             <!-- Search -->
             <StackPanel Orientation="Horizontal" Spacing="10">
-                <Button Content="Search" Width="80" />
-                <TextBox Name="SearchTextBox" Width="200" />
+                <Button Content="Search" Width="80" Click="SearchPartButton_Click" />
+                <TextBox Name="PartsSearchTextBox" Width="200" />
             </StackPanel>
 
             <!-- All candidate parts -->
