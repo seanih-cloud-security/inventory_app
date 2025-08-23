@@ -71,7 +71,7 @@
                          Grid.Column="1" />
 
                 <!-- Search button -->
-                <Button Content="Search" Width="80" Grid.Column="2" />
+                <Button Content="Search" Width="80" Grid.Column="2" Click="SearchProductButton_Click" />
             </Grid>
 
             <!-- Products list -->

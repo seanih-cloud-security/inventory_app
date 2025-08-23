@@ -2,6 +2,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using InventoryApp.Models;
 using InventoryApp.Utils;
 using MsBox.Avalonia;
@@ -66,17 +68,18 @@ public partial class InventoryView : UserControl
     private async void SearchPartButton_Click(object? sender, RoutedEventArgs e)
     {
         string searchText = PartsSearchBox.Text?.Trim() ?? "";
+        ObservableCollection<Part> allParts = AppData.AppInventory.AllParts;
 
         if (string.IsNullOrWhiteSpace(searchText))
         {
             // Reset to show all parts
-            PartsDataGrid.ItemsSource = AppData.AppInventory.AllParts;
+            PartsDataGrid.ItemsSource = allParts;
             return;
         }
-
+        
         // Lookup by name
-        var part = AppData.AppInventory.LookupPart(searchText);
-
+        var part = AppData.AppInventory.LookupPartByName(searchText);
+        
         if (part != null)
         {
             PartsDataGrid.ItemsSource = new List<Part> { part };
@@ -111,6 +114,37 @@ public partial class InventoryView : UserControl
         // TODO: Add delete product logic here
         Console.WriteLine("Delete product clicked");
     }
+    
+    private async void SearchProductButton_Click(object? sender, RoutedEventArgs e)
+    {
+        string searchText = ProductsSearchBox.Text?.Trim() ?? "";
+    
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            // Reset to show all parts
+            ProductDataGrid.ItemsSource = AppData.AppInventory.Products;
+            return;
+        }
+    
+        // Lookup by name
+        var product = AppData.AppInventory.LookupProductByName(searchText);
+    
+        if (product != null)
+        {
+            ProductDataGrid.ItemsSource = new List<Product> { product };
+        }
+        else
+        {
+            var noResults = MessageBoxManager.GetMessageBoxStandard(
+                "Search", 
+                "No results match."
+            );
+            await noResults.ShowAsync();
+            // Reset
+            ProductDataGrid.ItemsSource = AppData.AppInventory.Products;
+        }
+    }
+
 
     private void ExitButton_Click(object? sender, RoutedEventArgs e)
     {

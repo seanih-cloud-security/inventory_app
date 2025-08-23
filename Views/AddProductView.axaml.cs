@@ -45,7 +45,7 @@ namespace InventoryApp.Views
             }
 
             // Lookup by name
-            var part = AppData.AppInventory.LookupPart(searchText);
+            var part = AppData.AppInventory.LookupPartByName(searchText);
 
             if (part != null)
             {

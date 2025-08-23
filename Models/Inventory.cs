@@ -81,6 +81,10 @@ public class Inventory:INotifyPropertyChanged
 
     public Product? LookupProduct(int productId) =>
         Products.FirstOrDefault(p => p.ProductId == productId);
+    
+    public Product? LookupProductByName(string name) =>
+        Products.FirstOrDefault(p => 
+            p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
     public void UpdateProduct(int index, Product newProduct)
     {
@@ -103,7 +107,11 @@ public class Inventory:INotifyPropertyChanged
         return true;
     }
 
-    public Part? LookupPart(string name) =>
+    public Part? LookupPart(int partId) =>
+        AllParts.FirstOrDefault(p => 
+            p.PartId.Equals(partId));
+    
+    public Part? LookupPartByName(string name) =>
         AllParts.FirstOrDefault(p => 
             p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
