@@ -15,7 +15,7 @@ public partial class InventoryView : UserControl
     public event EventHandler? AddPartClicked;
     public event Action<Part>? ModifyPartClicked;
     public event EventHandler? AddProductClicked;
-    public event EventHandler? ModifyProductClicked;
+    public event Action<Product>? ModifyProductClicked;
     public event EventHandler? ExitClicked;
 
     public InventoryView()
@@ -105,14 +105,33 @@ public partial class InventoryView : UserControl
     private void ModifyProductButton_Click(object? sender, RoutedEventArgs e)
     {
         // TODO: Add modify product logic here
-        Console.WriteLine("ModifyProductButton_Click");
-        ModifyProductClicked?.Invoke(this, EventArgs.Empty);
+        if (ProductsDataGrid.SelectedItem is Product selectedProduct)
+        {
+            ModifyProductClicked?.Invoke(selectedProduct);
+        }
+        else
+        {
+            Console.WriteLine("No product selected to modify.");
+        }
     }
 
-    private void DeleteProductButton_Click(object? sender, RoutedEventArgs e)
+    private async void DeleteProductButton_Click(object? sender, RoutedEventArgs e)
     {
-        // TODO: Add delete product logic here
-        Console.WriteLine("Delete product clicked");
+        if (ProductsDataGrid.SelectedItem is not Product selectedProduct)
+        {
+            await ValidationHelper.ShowError("Please select a part to delete.");
+            return;
+        }
+
+        bool confirm = await ValidationHelper.ShowConfirmation(
+            $"Are you sure you want to delete '{selectedProduct.Name}'?",
+            "Delete Part");
+
+        if (confirm)
+        {
+            AppData.AppInventory.RemoveProduct(selectedProduct.ProductId);
+            Console.WriteLine($"Part {selectedProduct.Name} deleted.");
+        }
     }
     
     private async void SearchProductButton_Click(object? sender, RoutedEventArgs e)
@@ -122,7 +141,7 @@ public partial class InventoryView : UserControl
         if (string.IsNullOrWhiteSpace(searchText))
         {
             // Reset to show all parts
-            ProductDataGrid.ItemsSource = AppData.AppInventory.Products;
+            ProductsDataGrid.ItemsSource = AppData.AppInventory.Products;
             return;
         }
     
@@ -131,7 +150,7 @@ public partial class InventoryView : UserControl
     
         if (product != null)
         {
-            ProductDataGrid.ItemsSource = new List<Product> { product };
+            ProductsDataGrid.ItemsSource = new List<Product> { product };
         }
         else
         {
@@ -141,7 +160,7 @@ public partial class InventoryView : UserControl
             );
             await noResults.ShowAsync();
             // Reset
-            ProductDataGrid.ItemsSource = AppData.AppInventory.Products;
+            ProductsDataGrid.ItemsSource = AppData.AppInventory.Products;
         }
     }
 

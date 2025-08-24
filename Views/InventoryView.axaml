@@ -76,7 +76,7 @@
 
             <!-- Products list -->
             <StackPanel>
-                <DataGrid Name="ProductDataGrid"
+                <DataGrid Name="ProductsDataGrid"
                           ItemsSource="{Binding Products}"
                           AutoGenerateColumns="False"
                           Height="250"

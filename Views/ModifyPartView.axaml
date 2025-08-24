@@ -20,7 +20,7 @@
 
             <!-- Row 0: ID -->
             <TextBlock Text="ID" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
-            <TextBox Name="IdTextBox" IsEnabled="False" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="" Width="200"
+            <TextBox Name="IdTextBox" IsEnabled="False" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Width="200"
                      HorizontalAlignment="Left" />
 
             <!-- Row 1: Name -->

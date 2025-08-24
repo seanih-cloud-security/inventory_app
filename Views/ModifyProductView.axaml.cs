@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
 using System;
+using InventoryApp.Models;
 
 namespace InventoryApp.Views
 {
@@ -10,16 +11,23 @@ namespace InventoryApp.Views
         public event EventHandler? CancelClicked;
 
         public event EventHandler? SaveClicked;
+        private Product _product;
 
         // Constructor
-        public ModifyProductView()
+        public ModifyProductView(Product selectedProduct)
         {
             InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
+            
+            _product = selectedProduct;
+            DataContext = _product;
+            
+            // Populate fields
+            IdTextBox.Text = selectedProduct.ProductId.ToString();
+            NameTextBox.Text = selectedProduct.Name;
+            InventoryTextBox.Text = selectedProduct.InStock.ToString();
+            PriceTextBox.Text = selectedProduct.Price.ToString();
+            MaxTextBox.Text = selectedProduct.Max.ToString();
+            MinTextBox.Text = selectedProduct.Min.ToString();
         }
 
         // add event handlers here

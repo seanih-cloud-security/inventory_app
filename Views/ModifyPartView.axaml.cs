@@ -11,7 +11,7 @@ public partial class ModifyPartView : UserControl
     public event EventHandler? CancelClicked;
     public event EventHandler? SaveClicked;
     private Part _part;
-
+    
     public ModifyPartView(Part part)
     {
         InitializeComponent();

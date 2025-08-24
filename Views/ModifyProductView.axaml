@@ -1,6 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="InventoryApp.Views.ModifyProductView"
+             xmlns:models="clr-namespace:InventoryApp.Models"
+             x:DataType="models:Product"
              MinWidth="900"
              Padding="10">
 
@@ -21,7 +23,7 @@
 
             <!-- ID -->
             <TextBlock Text="ID:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
-            <TextBox Name="IdTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="Auto Gen" />
+            <TextBox Name="IdTextBox" IsReadOnly="True" IsEnabled="False" Grid.Row="0" Grid.Column="1" Text="Auto Gen" />
 
             <!-- Name -->
             <TextBlock Text="Name:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />

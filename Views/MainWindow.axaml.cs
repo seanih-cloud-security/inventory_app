@@ -93,9 +93,9 @@ public partial class MainWindow : Window
         NavigateTo(_addProductView);
     }
 
-    private void InventoryView_ModifyProductClicked(object? sender, EventArgs e)
+    private void InventoryView_ModifyProductClicked(Product selectedProduct)
     {
-        _modifyProductView = new ModifyProductView();
+        _modifyProductView = new ModifyProductView(selectedProduct);
         _modifyProductView.CancelClicked += ModifyProductView_CancelClicked;
         _modifyProductView.SaveClicked += ModifyProductView_SaveClicked;
         NavigateTo(_modifyProductView);
