@@ -120,7 +120,6 @@ namespace InventoryApp.Views
                 if (!priceValid) return;
 
                 var newProduct = new Product(
-                    // new ObservableCollection<Part>(),
                     IdGenerator.GenerateProductId(),
                     name,
                     price,

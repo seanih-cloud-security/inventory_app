@@ -51,7 +51,7 @@
 
             <!-- Search -->
             <StackPanel Orientation="Horizontal" Spacing="10">
-                <Button Content="Search" Width="80" />
+                <Button Content="Search" Width="80" Click="SearchPartButton_Click" />
                 <TextBox Name="SearchTextBox" Width="200" />
             </StackPanel>
 

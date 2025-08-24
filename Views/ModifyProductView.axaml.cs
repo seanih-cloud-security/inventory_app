@@ -1,11 +1,12 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using InventoryApp.Models;
 using InventoryApp.Utils;
+using MsBox.Avalonia;
 
 namespace InventoryApp.Views
 {
@@ -96,6 +97,38 @@ namespace InventoryApp.Views
         {
             CancelClicked?.Invoke(this, EventArgs.Empty);
         }
+        
+        private async void SearchPartButton_Click(object? sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text?.Trim() ?? "";
+            ObservableCollection<Part> allParts = AppData.AppInventory.AllParts;
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                // Reset to show all parts
+                AllPartsDataGrid.ItemsSource = allParts;
+                return;
+            }
+
+            // Lookup by name
+            var part = AppData.AppInventory.LookupPartByName(searchText);
+
+            if (part != null)
+            {
+                AllPartsDataGrid.ItemsSource = new List<Part> { part };
+            }
+            else
+            {
+                var noResults = MessageBoxManager.GetMessageBoxStandard(
+                    "Search",
+                    "No results match."
+                );
+                await noResults.ShowAsync();
+                // Reset
+                AllPartsDataGrid.ItemsSource = AppData.AppInventory.AllParts;
+            }
+        }
+
 
         private void AddAssocPartButton_Click(object? sender, RoutedEventArgs e)
         {
@@ -108,8 +141,8 @@ namespace InventoryApp.Views
 
         private void DeleteAssocPartButton_Click(object? sender, RoutedEventArgs e)
         {
-            var selectedPart = AssociatedPartsDataGrid.SelectedItem as Part;
-            if (selectedPart != null)
+            var assocPartsGrid = this.FindControl<DataGrid>("AssociatedPartsDataGrid");
+            if (assocPartsGrid.SelectedItem is Part selectedPart)
             {
                 _associatedParts.Remove(selectedPart);
             }
