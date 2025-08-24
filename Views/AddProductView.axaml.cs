@@ -14,13 +14,13 @@ namespace InventoryApp.Views
         public event EventHandler? CancelClicked;
         public event EventHandler<Product>? SaveClicked;
 
-        private ObservableCollection<Part> _associatedParts = new ObservableCollection<Part>();
+        private ObservableCollection<Part> _associatedParts = new();
 
         public AddProductView()
         {
             InitializeComponent();
             DataContext = this;
-            
+
             // Bind grids
             var allPartsGrid = this.FindControl<DataGrid>("AllPartsDataGrid");
             var assocPartsGrid = this.FindControl<DataGrid>("AssociatedPartsDataGrid");
@@ -32,7 +32,7 @@ namespace InventoryApp.Views
             this.FindControl<Button>("AddPartToProductBtn")!.Click += AddAssocPartButton_Click;
             this.FindControl<Button>("DeletePartFromProductBtn")!.Click += DeleteAssocPartButton_Click;
         }
-        
+
         private async void SearchPartButton_Click(object? sender, RoutedEventArgs e)
         {
             string searchText = PartsSearchTextBox.Text?.Trim() ?? "";
@@ -54,7 +54,7 @@ namespace InventoryApp.Views
             else
             {
                 var noResults = MessageBoxManager.GetMessageBoxStandard(
-                    "Search", 
+                    "Search",
                     "No results match."
                 );
                 await noResults.ShowAsync();
@@ -120,7 +120,7 @@ namespace InventoryApp.Views
                 if (!priceValid) return;
 
                 var newProduct = new Product(
-                    new ObservableCollection<Part>(),
+                    // new ObservableCollection<Part>(),
                     IdGenerator.GenerateProductId(),
                     name,
                     price,
@@ -128,7 +128,7 @@ namespace InventoryApp.Views
                     min,
                     max
                 );
-                
+
                 AppData.AppInventory.AddProduct(newProduct);
 
                 foreach (var part in _associatedParts)
@@ -142,7 +142,7 @@ namespace InventoryApp.Views
                     .ShowAsync();
             }
         }
-        
+
         private void AddProductCancelButton_Click(object? sender, RoutedEventArgs e)
         {
             CancelClicked?.Invoke(this, EventArgs.Empty);

@@ -1,45 +1,118 @@
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using InventoryApp.Models;
+using InventoryApp.Utils;
 
 namespace InventoryApp.Views
 {
     public partial class ModifyProductView : UserControl
     {
         public event EventHandler? CancelClicked;
-
         public event EventHandler? SaveClicked;
-        private Product _product;
 
-        // Constructor
+        private Product _product; // original inventory reference
+        private ObservableCollection<Part> _associatedParts; // bound to DataGrid for UI edits
+
         public ModifyProductView(Product selectedProduct)
         {
             InitializeComponent();
-            
+
+            // Keep the original product reference
             _product = selectedProduct;
-            DataContext = _product;
-            
-            // Populate fields
-            IdTextBox.Text = selectedProduct.ProductId.ToString();
-            NameTextBox.Text = selectedProduct.Name;
-            InventoryTextBox.Text = selectedProduct.InStock.ToString();
-            PriceTextBox.Text = selectedProduct.Price.ToString();
-            MaxTextBox.Text = selectedProduct.Max.ToString();
-            MinTextBox.Text = selectedProduct.Min.ToString();
+
+            // Create a detached collection for UI binding
+            _associatedParts = new ObservableCollection<Part>(selectedProduct.AssociatedParts);
+
+            // Bind the product fields to the form
+            IdTextBox.Text = _product.ProductId.ToString();
+            NameTextBox.Text = _product.Name;
+            InventoryTextBox.Text = _product.InStock.ToString();
+            PriceTextBox.Text = _product.Price.ToString();
+            MaxTextBox.Text = _product.Max.ToString();
+            MinTextBox.Text = _product.Min.ToString();
+
+            // Bind DataGrids
+            AllPartsDataGrid.ItemsSource = AppData.AppInventory.AllParts;
+            AssociatedPartsDataGrid.ItemsSource = _associatedParts;
+
+            // Wire buttons
+            this.FindControl<Button>("AddPartToProductBtn")!.Click += AddAssocPartButton_Click;
+            this.FindControl<Button>("DeletePartFromProductBtn")!.Click += DeleteAssocPartButton_Click;
         }
 
-        // add event handlers here
-        private void ModifyProductSaveButton_Click(object? sender, RoutedEventArgs e)
+        private async void ModifyProductSaveButton_Click(object? sender, RoutedEventArgs e)
         {
+            string name = NameTextBox.Text!;
+            string invText = InventoryTextBox.Text!;
+            string priceText = PriceTextBox.Text!;
+            string minText = MinTextBox.Text!;
+            string maxText = MaxTextBox.Text!;
+
+            // Validate fields
+            if (!await ValidationHelper.ValidateRequired(name, "Name")) return;
+
+            var (invValid, inventory) = await ValidationHelper.ValidateInt(invText, "Inventory");
+            if (!invValid) return;
+
+            var (minValid, min) = await ValidationHelper.ValidateInt(minText, "Min");
+            if (!minValid) return;
+
+            var (maxValid, max) = await ValidationHelper.ValidateInt(maxText, "Max");
+            if (!maxValid) return;
+
+            if (min > max)
+            {
+                await ValidationHelper.ShowError("Min must be ≤ Max.");
+                return;
+            }
+
+            if (inventory < min || inventory > max)
+            {
+                await ValidationHelper.ShowError("Inventory must be between Min and Max.");
+                return;
+            }
+
+            var (priceValid, price) = await ValidationHelper.ValidateDecimal(priceText, "Price", 0);
+            if (!priceValid) return;
+
+            // Update the original product
+            _product.Name = name;
+            _product.Price = price;
+            _product.InStock = inventory;
+            _product.Min = min;
+            _product.Max = max;
+
+            // Update the associated parts
+            _product.AssociatedParts = new ObservableCollection<Part>(_associatedParts.ToList());
+
             SaveClicked?.Invoke(this, EventArgs.Empty);
-            // TODO: Modify saving logic here
         }
 
         private void ModifyProductCancelButton_Click(object? sender, RoutedEventArgs e)
         {
             CancelClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void AddAssocPartButton_Click(object? sender, RoutedEventArgs e)
+        {
+            var selectedPart = AllPartsDataGrid.SelectedItem as Part;
+            if (selectedPart != null && !_associatedParts.Contains(selectedPart))
+            {
+                _associatedParts.Add(selectedPart);
+            }
+        }
+
+        private void DeleteAssocPartButton_Click(object? sender, RoutedEventArgs e)
+        {
+            var selectedPart = AssociatedPartsDataGrid.SelectedItem as Part;
+            if (selectedPart != null)
+            {
+                _associatedParts.Remove(selectedPart);
+            }
         }
     }
 }

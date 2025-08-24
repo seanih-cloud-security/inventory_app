@@ -6,12 +6,13 @@ using System.Runtime.CompilerServices;
 
 namespace InventoryApp.Models;
 
-public class Inventory:INotifyPropertyChanged
+public class Inventory : INotifyPropertyChanged
 {
     public ObservableCollection<Product> Products { get; set; }
     public ObservableCollection<Part> AllParts { get; set; }
-    
+
     private ObservableCollection<Part> _filteredParts = new();
+
     public ObservableCollection<Part> FilteredParts
     {
         get => _filteredParts;
@@ -33,6 +34,7 @@ public class Inventory:INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
     private void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
@@ -64,7 +66,15 @@ public class Inventory:INotifyPropertyChanged
             CompanyName = "Fastenal"
         });
 
-        Products.Add(new Product(AllParts, 1, "sean", 3, 3, 4, 6));
+        Products.Add(new Product(
+            // new ObservableCollection<Part>(), 
+            1, 
+            "sean", 
+            3, 
+            3, 
+            1, 
+            5)
+        );
     }
 
     // ===== PRODUCT METHODS =====
@@ -81,9 +91,9 @@ public class Inventory:INotifyPropertyChanged
 
     public Product? LookupProduct(int productId) =>
         Products.FirstOrDefault(p => p.ProductId == productId);
-    
+
     public Product? LookupProductByName(string name) =>
-        Products.FirstOrDefault(p => 
+        Products.FirstOrDefault(p =>
             p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
     public void UpdateProduct(int index, Product newProduct)
@@ -108,11 +118,11 @@ public class Inventory:INotifyPropertyChanged
     }
 
     public Part? LookupPart(int partId) =>
-        AllParts.FirstOrDefault(p => 
+        AllParts.FirstOrDefault(p =>
             p.PartId.Equals(partId));
-    
+
     public Part? LookupPartByName(string name) =>
-        AllParts.FirstOrDefault(p => 
+        AllParts.FirstOrDefault(p =>
             p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
     public void UpdatePart(int index, Part newPart)

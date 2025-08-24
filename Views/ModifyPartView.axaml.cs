@@ -11,7 +11,7 @@ public partial class ModifyPartView : UserControl
     public event EventHandler? CancelClicked;
     public event EventHandler? SaveClicked;
     private Part _part;
-    
+
     public ModifyPartView(Part part)
     {
         InitializeComponent();
@@ -39,7 +39,6 @@ public partial class ModifyPartView : UserControl
     private async void ModifySaveButton_Click(object? sender, RoutedEventArgs e)
     {
         // TODO: Add Update logic here
-        // Read all input values
         int index = AppData.AppInventory.AllParts.IndexOf(_part);
         int id = int.Parse(IdTextBox.Text!);
         string name = NameTextBox.Text!;

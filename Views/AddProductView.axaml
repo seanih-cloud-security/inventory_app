@@ -58,10 +58,11 @@
             <DataGrid Name="AllPartsDataGrid"
                       Height="150"
                       AutoGenerateColumns="True"
-                      IsReadOnly="True"/>
+                      IsReadOnly="True" />
 
             <!-- Add button -->
-            <Button Name="AddPartToProductBtn" Content="Add" Width="80" HorizontalAlignment="Right" Click="AddAssocPartButton_Click" />
+            <Button Name="AddPartToProductBtn" Content="Add" Width="80" HorizontalAlignment="Right"
+                    Click="AddAssocPartButton_Click" />
 
             <!-- Associated parts -->
             <TextBlock Text="Parts Associated With This Product" FontWeight="Bold" Margin="0,10,0,0" />

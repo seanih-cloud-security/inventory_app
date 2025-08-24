@@ -22,7 +22,7 @@ public partial class InventoryView : UserControl
     {
         InitializeComponent();
         DataContext = AppData.AppInventory;
-        
+
         // Initialize FilteredParts with everything
         AppData.AppInventory.RefreshFilteredParts();
     }
@@ -64,7 +64,7 @@ public partial class InventoryView : UserControl
             Console.WriteLine($"Part {selectedPart.Name} deleted.");
         }
     }
-    
+
     private async void SearchPartButton_Click(object? sender, RoutedEventArgs e)
     {
         string searchText = PartsSearchBox.Text?.Trim() ?? "";
@@ -76,10 +76,10 @@ public partial class InventoryView : UserControl
             PartsDataGrid.ItemsSource = allParts;
             return;
         }
-        
+
         // Lookup by name
         var part = AppData.AppInventory.LookupPartByName(searchText);
-        
+
         if (part != null)
         {
             PartsDataGrid.ItemsSource = new List<Part> { part };
@@ -87,7 +87,7 @@ public partial class InventoryView : UserControl
         else
         {
             var noResults = MessageBoxManager.GetMessageBoxStandard(
-                "Search", 
+                "Search",
                 "No results match."
             );
             await noResults.ShowAsync();
@@ -133,21 +133,21 @@ public partial class InventoryView : UserControl
             Console.WriteLine($"Part {selectedProduct.Name} deleted.");
         }
     }
-    
+
     private async void SearchProductButton_Click(object? sender, RoutedEventArgs e)
     {
         string searchText = ProductsSearchBox.Text?.Trim() ?? "";
-    
+
         if (string.IsNullOrWhiteSpace(searchText))
         {
             // Reset to show all parts
             ProductsDataGrid.ItemsSource = AppData.AppInventory.Products;
             return;
         }
-    
+
         // Lookup by name
         var product = AppData.AppInventory.LookupProductByName(searchText);
-    
+
         if (product != null)
         {
             ProductsDataGrid.ItemsSource = new List<Product> { product };
@@ -155,7 +155,7 @@ public partial class InventoryView : UserControl
         else
         {
             var noResults = MessageBoxManager.GetMessageBoxStandard(
-                "Search", 
+                "Search",
                 "No results match."
             );
             await noResults.ShowAsync();

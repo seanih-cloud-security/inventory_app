@@ -66,7 +66,7 @@ namespace InventoryApp.Utils
 
             return (true, result);
         }
-        
+
         // CONFIRM DELETE PART
         public static async Task<bool> ShowConfirmation(string message, string title = "Confirm Delete")
         {
@@ -90,8 +90,8 @@ namespace InventoryApp.Utils
                             Spacing = 20,
                             Children =
                             {
-                                new Button { Content = "Yes", Width = 80, IsDefault = true, Name="YesBtn" },
-                                new Button { Content = "No", Width = 80, IsCancel = true, Name="NoBtn" }
+                                new Button { Content = "Yes", Width = 80, IsDefault = true, Name = "YesBtn" },
+                                new Button { Content = "No", Width = 80, IsCancel = true, Name = "NoBtn" }
                             }
                         }
                     }
@@ -102,19 +102,20 @@ namespace InventoryApp.Utils
 
             // Hook up buttons
             (dialog.Content as StackPanel)!.Children.OfType<StackPanel>()
-                .First().Children.OfType<Button>().First(b => b.Name=="YesBtn").Click += (_, _) =>
+                .First().Children.OfType<Button>().First(b => b.Name == "YesBtn").Click += (_, _) =>
                 {
                     tcs.SetResult(true);
                     dialog.Close();
                 };
             (dialog.Content as StackPanel)!.Children.OfType<StackPanel>()
-                .First().Children.OfType<Button>().First(b => b.Name=="NoBtn").Click += (_, _) =>
+                .First().Children.OfType<Button>().First(b => b.Name == "NoBtn").Click += (_, _) =>
                 {
                     tcs.SetResult(false);
                     dialog.Close();
                 };
 
-            await dialog.ShowDialog((Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!);
+            await dialog.ShowDialog(
+                (Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!);
             return await tcs.Task;
         }
     }

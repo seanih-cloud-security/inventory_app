@@ -4,22 +4,25 @@ using System.Linq;
 
 namespace InventoryApp.Models;
 
-public class Product(
-    ObservableCollection<Part> associatedParts,
-    int productId,
-    string name,
-    decimal price,
-    int inStock,
-    int min,
-    int max)
+public class Product
 {
-    public ObservableCollection<Part> AssociatedParts { get; set; } = associatedParts;
-    public int ProductId { get; set; } = productId;
-    public string Name { get; set; } = name;
-    public decimal Price { get; set; } = price;
-    public int InStock { get; set; } = inStock;
-    public int Min { get; set; } = min;
-    public int Max { get; set; } = max;
+    public ObservableCollection<Part> AssociatedParts { get; set; } = new ObservableCollection<Part>();
+    public int ProductId { get; set; }
+    public string Name { get; set; } = null!;
+    public decimal Price { get; set; }
+    public int InStock { get; set; }
+    public int Min { get; set; }
+    public int Max { get; set; }
+
+    public Product(int productId, string name, decimal price, int inStock, int min, int max)
+    {
+        ProductId = productId;
+        Name = name;
+        Price = price;
+        InStock = inStock;
+        Min = min;
+        Max = max;
+    }
 
     public void CopyFrom(Product other)
     {
