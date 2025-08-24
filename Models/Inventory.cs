@@ -96,11 +96,11 @@ public class Inventory : INotifyPropertyChanged
         Products.FirstOrDefault(p =>
             p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-    public void UpdateProduct(int index, Product newProduct)
+    public void UpdateProduct(int index, Product updatedProduct)
     {
         if (index >= 0 && index < Products.Count)
         {
-            Products[index].CopyFrom(newProduct);
+            Products[index].CopyFrom(updatedProduct);
         }
     }
 

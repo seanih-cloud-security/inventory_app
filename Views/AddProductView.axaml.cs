@@ -27,10 +27,6 @@ namespace InventoryApp.Views
 
             allPartsGrid.ItemsSource = AppData.AppInventory.AllParts;
             assocPartsGrid.ItemsSource = _associatedParts;
-
-            // Wire buttons
-            this.FindControl<Button>("AddPartToProductBtn")!.Click += AddAssocPartButton_Click;
-            this.FindControl<Button>("DeletePartFromProductBtn")!.Click += DeleteAssocPartButton_Click;
         }
 
         private async void SearchPartButton_Click(object? sender, RoutedEventArgs e)
