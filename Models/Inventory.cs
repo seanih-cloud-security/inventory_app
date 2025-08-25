@@ -47,30 +47,29 @@ public class Inventory : INotifyPropertyChanged
         AllParts.Add(new InHouse
         {
             PartId = 1,
-            Name = "Screw",
-            InStock = 50,
-            Price = 0.15m,
-            Min = 10,
-            Max = 200,
+            Name = "CPU",
+            InStock = 10,
+            Price = 279.99m,
+            Min = 1,
+            Max = 10,
             MachineId = 123
         });
 
         AllParts.Add(new Outsourced
         {
             PartId = 2,
-            Name = "Bolt",
-            InStock = 30,
-            Price = 0.25m,
-            Min = 5,
-            Max = 100,
-            CompanyName = "Fastenal"
+            Name = "GPU",
+            InStock = 3,
+            Price = 699.99m,
+            Min = 1,
+            Max = 8,
+            CompanyName = "NVIDIA Corporation",
         });
 
         Products.Add(new Product(
-            // new ObservableCollection<Part>(), 
             1, 
-            "sean", 
-            3, 
+            "Omega PC", 
+            2549.99m, 
             3, 
             1, 
             5)

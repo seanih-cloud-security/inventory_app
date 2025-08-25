@@ -31,7 +31,7 @@
             <TextBox Name="InventoryTextBox" Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" />
 
             <!-- Row 3: Price -->
-            <TextBlock Text="Price/Cost" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0"
+            <TextBlock Text="Price" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0"
                        VerticalAlignment="Center" />
             <TextBox Name="PriceTextBox" Grid.Row="3" Grid.Column="1" Width="200" HorizontalAlignment="Left" />
 

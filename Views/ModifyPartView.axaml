@@ -33,17 +33,17 @@
             <TextBox Name="InventoryTextBox" Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" />
 
             <!-- Row 3: Price -->
-            <TextBlock Text="Price/Cost" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0"
+            <TextBlock Text="Price" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0"
                        VerticalAlignment="Center" />
             <TextBox Name="PriceTextBox" Grid.Row="3" Grid.Column="1" Width="200" HorizontalAlignment="Left" />
 
             <!-- Row 4: Max & Min on the SAME row -->
-            <TextBlock Text="Max" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
+            <TextBlock Text="Min" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
             <!-- Nested grid in column 1 to tightly pack MaxBox, Min label, MinBox -->
             <Grid Grid.Row="4" Grid.Column="1" ColumnDefinitions="120,Auto,120" ColumnSpacing="10">
-                <TextBox Name="MaxTextBox" Grid.Column="0" Width="120" HorizontalAlignment="Left" />
-                <TextBlock Text="Min" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" />
-                <TextBox Name="MinTextBox" Grid.Column="2" Width="120" HorizontalAlignment="Left" />
+                <TextBox Name="MinTextBox" Grid.Column="0" Width="120" HorizontalAlignment="Left" />
+                <TextBlock Text="Max" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" />
+                <TextBox Name="MaxTextBox" Grid.Column="2" Width="120" HorizontalAlignment="Left" />
             </Grid>
 
             <!-- Row 5: Dynamic field -->

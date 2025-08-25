@@ -134,15 +134,6 @@ namespace InventoryApp.Views
                 _associatedParts.Add(selectedPart);
             }
         }
-
-        // private void DeleteAssocPartButton_Click(object? sender, RoutedEventArgs e)
-        // {
-        //     var assocPartsGrid = this.FindControl<DataGrid>("AssociatedPartsDataGrid");
-        //     if (assocPartsGrid.SelectedItem is Part selectedPart)
-        //     {
-        //         _associatedParts.Remove(selectedPart);
-        //     }
-        // }
         
         private void DeleteAssocPartButton_Click(object? sender, RoutedEventArgs e)
         {
