@@ -106,11 +106,8 @@ public class Inventory : INotifyPropertyChanged
     // ===== PART METHODS =====
     public void AddPart(Part part) => AllParts.Add(part);
 
-    public bool RemovePart(int partId)
+    public bool DeletePart(Part part)
     {
-        var part = AllParts.FirstOrDefault(p => p.PartId == partId);
-        if (part == null) return false;
-
         AllParts.Remove(part);
         RefreshFilteredParts();
         return true;

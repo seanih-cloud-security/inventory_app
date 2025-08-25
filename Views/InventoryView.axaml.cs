@@ -54,14 +54,23 @@ public partial class InventoryView : UserControl
             return;
         }
 
-        bool confirm = await ValidationHelper.ShowConfirmation(
-            $"Are you sure you want to delete '{selectedPart.Name}'?",
-            "Delete Part");
-
-        if (confirm)
+        if (PartsDataGrid.SelectedItem is Part)
         {
-            AppData.AppInventory.RemovePart(selectedPart.PartId);
-            Console.WriteLine($"Part {selectedPart.Name} deleted.");
+            if (AppData.AppInventory.Products.Any(product => product.AssociatedParts.Contains(selectedPart)))
+            {
+                await ValidationHelper.ShowError("You cannot delete a part associated with a product.");
+                return;
+            }
+            
+            bool confirm = await ValidationHelper.ShowConfirmation(
+                $"Are you sure you want to delete '{selectedPart.Name}'?",
+                "Delete Part");
+
+            if (confirm)
+            {
+                AppData.AppInventory.DeletePart(selectedPart);
+                Console.WriteLine($"Part {selectedPart.Name} deleted.");
+            }
         }
     }
 

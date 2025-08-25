@@ -138,35 +138,9 @@ namespace InventoryApp.Views
         private void DeleteAssocPartButton_Click(object? sender, RoutedEventArgs e)
         {
             var assocPartsGrid = this.FindControl<DataGrid>("AssociatedPartsDataGrid");
-    
-            Console.WriteLine($"=== DELETE BUTTON CLICKED ===");
-            Console.WriteLine($"Grid has selection: {assocPartsGrid.SelectedItem != null}");
-            Console.WriteLine($"Collection count before: {_associatedParts.Count}");
-    
-            // Log all current parts
-            for (int i = 0; i < _associatedParts.Count; i++)
-            {
-                Console.WriteLine($"  [{i}] {_associatedParts[i].PartId} - {_associatedParts[i].Name}");
-            }
-    
             if (assocPartsGrid.SelectedItem is Part selectedPart)
             {
-                Console.WriteLine($"Selected part: {selectedPart.PartId} - {selectedPart.Name}");
-        
-                bool removed = _associatedParts.Remove(selectedPart);
-        
-                Console.WriteLine($"Remove() returned: {removed}");
-                Console.WriteLine($"Collection count after: {_associatedParts.Count}");
-        
-                // Log remaining parts
-                for (int i = 0; i < _associatedParts.Count; i++)
-                {
-                    Console.WriteLine($"  Remaining [{i}] {_associatedParts[i].PartId} - {_associatedParts[i].Name}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No item selected!");
+                _associatedParts.Remove(selectedPart);
             }
         }
     }
